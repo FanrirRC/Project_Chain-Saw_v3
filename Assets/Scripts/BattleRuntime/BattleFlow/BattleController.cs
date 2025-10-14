@@ -82,7 +82,7 @@ public class BattleController : MonoBehaviour
             yield return commandUI.OpenFor(_active);
             if (commandUI.WasCancelled) { continue; }
 
-            var decision = commandUI.LastDecision;
+            var decision = commandUI.lastDecision;
             if (decision.Type == UI.CommandDecision.DecisionType.None) { continue; }
 
             var targets = decision.Targets;

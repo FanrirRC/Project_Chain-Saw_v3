@@ -30,9 +30,9 @@ namespace UI
         [SerializeField] private Transform buttonsRoot;             // parent with Attack/Skills/Items/Guard/Cancel buttons
         [SerializeField] private bool allowKeyboard = true;
         [SerializeField] private GameObject selectionCursorPrefab;  // prefab of a small Image/arrow
-        [SerializeField] private Vector2 cursorOffset = new Vector2(-24f, 0f);
+        [SerializeField] private Vector2 cursorOffset = new Vector2(-15f, -5f);
 
-        public CommandDecision LastDecision { get; private set; }
+        public CommandDecision lastDecision { get; private set; }
         public bool WasCancelled { get; private set; }
 
         private CharacterScript _currentActor;
@@ -45,14 +45,14 @@ namespace UI
         private SubmenuRequest _submenu = SubmenuRequest.None;
 
         // -------- Button hooks (wire these from your UI Buttons) --------
-        public void ChooseAttack() => LastDecision = new CommandDecision
+        public void ChooseAttack() => lastDecision = new CommandDecision
         {
             Type = CommandDecision.DecisionType.Attack,
             NeedsTarget = true,
             TargetsAllies = false,
             TargetMode = TargetMode.Single
         };
-        public void ChooseGuard() => LastDecision = new CommandDecision
+        public void ChooseGuard() => lastDecision = new CommandDecision
         {
             Type = CommandDecision.DecisionType.Guard,
             NeedsTarget = false
@@ -65,7 +65,7 @@ namespace UI
 
         public void ChooseSkill(SkillDefinition s)
         {
-            LastDecision = new CommandDecision
+            lastDecision = new CommandDecision
             {
                 Type = CommandDecision.DecisionType.Skill,
                 Skill = s,
@@ -77,7 +77,7 @@ namespace UI
 
         public void ChooseItem(ItemDefinition i, bool allies, bool all)
         {
-            LastDecision = new CommandDecision
+            lastDecision = new CommandDecision
             {
                 Type = CommandDecision.DecisionType.Item,
                 Item = i,
@@ -92,7 +92,7 @@ namespace UI
         {
             _currentActor = actor;
             WasCancelled = false;
-            LastDecision = new CommandDecision();
+            lastDecision = new CommandDecision();
             _submenu = SubmenuRequest.None;
 
             if (!_canvas) _canvas = GetComponentInParent<Canvas>();
@@ -109,7 +109,7 @@ namespace UI
                 SelectCurrent(); // place cursor on current button
             }
 
-            while (LastDecision.Type == CommandDecision.DecisionType.None && !WasCancelled)
+            while (lastDecision.Type == CommandDecision.DecisionType.None && !WasCancelled)
             {
                 // If a submenu was requested, open it synchronously and pause this loop's input
                 if (_submenu != SubmenuRequest.None && actionPanel != null)
@@ -135,7 +135,7 @@ namespace UI
                     if (_cursorInstance) _cursorInstance.gameObject.SetActive(true);
                     SelectCurrent();
 
-                    if (LastDecision.Type != CommandDecision.DecisionType.None || WasCancelled)
+                    if (lastDecision.Type != CommandDecision.DecisionType.None || WasCancelled)
                         break;
 
                     // continue next frame to avoid eating the Enter/Esc that closed submenu
