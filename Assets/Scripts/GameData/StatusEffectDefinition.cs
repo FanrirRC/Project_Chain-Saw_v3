@@ -29,5 +29,15 @@ namespace Data
         [Header("Damage over time")]
         public bool isDOT = false;
         [Range(0, 100)] public int dotPercentOfMaxHP = 0;
+
+        [Header("Animation Triggers (optional)")]
+        [Tooltip("Trigger fired on the TARGET when this status is applied.")]
+        public AnimatorTriggerRef onApplyTrigger;
+
+        [Tooltip("Trigger fired on the TARGET when this status expires.")]
+        public AnimatorTriggerRef onExpireTrigger;
+
+        [Tooltip("Trigger fired on the TARGET on each tick (DOT/HoT).")]
+        public AnimatorTriggerRef onTickTrigger;
     }
 }

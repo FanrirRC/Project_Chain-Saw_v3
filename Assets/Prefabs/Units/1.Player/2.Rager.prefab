@@ -9,6 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9027463366863823815}
+  - component: {fileID: 6348423093198025691}
+  - component: {fileID: 574136048039687118}
+  - component: {fileID: 4556448960806984720}
+  - component: {fileID: 7835405204537555335}
   m_Layer: 0
   m_Name: 2.Rager
   m_TagString: Untagged
@@ -32,6 +36,85 @@ Transform:
   - {fileID: 1804349631532724506}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6348423093198025691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519450849806918247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdda4049bebb84478b4ed04dfbbda6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterScript
+  unitType: 0
+  characterName: Rager
+  characterModel: {fileID: 1315480736310832032}
+  portrait: {fileID: 21300000, guid: cc01ff06f6defaf4fa1563f2505e96fb, type: 3}
+  characterStats: {fileID: 11400000, guid: a937ccd0928a74a47ad25d282841e32c, type: 2}
+  enemyStats: {fileID: 0}
+  maxHP: 0
+  currentHP: 0
+  maxSP: 0
+  currentSP: 0
+  activeStatusEffects: []
+  animator: {fileID: 7835405204537555335}
+  idleState: Idle
+  attackTrigger: Attack
+  hurtTrigger: Hurt
+  dieTrigger: Die
+  dieState: Die
+  attackWindup: 0.25
+  attackRecover: 0.25
+--- !u!114 &574136048039687118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519450849806918247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad69eca8c88e0094a975b3ba4a8fe3d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillsInventory
+  skills: []
+--- !u!114 &4556448960806984720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519450849806918247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8213441283005478da6abee34b047d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemsInventory
+  items: []
+--- !u!95 &7835405204537555335
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519450849806918247}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 2caa7f28c764a584492291f17d328500, type: 3}
+  m_Controller: {fileID: 9100000, guid: 66ecff2b2889a3f4298c296e76b487eb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7546408144563469701
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,6 +290,11 @@ PrefabInstance:
       addedObject: {fileID: 4742184664971180395}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2caa7f28c764a584492291f17d328500, type: 3}
+--- !u!1 &1315480736310832032 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2caa7f28c764a584492291f17d328500, type: 3}
+  m_PrefabInstance: {fileID: 2198019484795541233}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1804349631532724506 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2caa7f28c764a584492291f17d328500, type: 3}

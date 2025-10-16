@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1361562149492436828}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0.063, y: -0, z: 0.05}
+  m_LocalScale: {x: 0.8125, y: 0.5625, z: 0.75}
+  m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6231853750064660998}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 2809209549028179804}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &3292198251261493752
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -99,6 +99,10 @@ GameObject:
   m_Component:
   - component: {fileID: 9027463366863823815}
   - component: {fileID: 4766901960701786581}
+  - component: {fileID: 730014274846262245}
+  - component: {fileID: 4139946973491524917}
+  - component: {fileID: 1178155758417492558}
+  - component: {fileID: 5264481265070905956}
   m_Layer: 0
   m_Name: 1.Chainsaw
   m_TagString: Untagged
@@ -136,23 +140,88 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterScript
   unitType: 0
   characterName: Chainsaw
-  characterModel: {fileID: 0}
-  portrait: {fileID: 0}
-  characterStats: {fileID: 0}
+  characterModel: {fileID: 3766415100802248825}
+  portrait: {fileID: 21300000, guid: 98f95ba68b2c3d24cba927383cda95c9, type: 3}
+  characterStats: {fileID: 11400000, guid: 3b0674c42c35f3d44be28db9f1e86a6a, type: 2}
   enemyStats: {fileID: 0}
   maxHP: 0
   currentHP: 0
   maxSP: 0
   currentSP: 0
   activeStatusEffects: []
-  animator: {fileID: 0}
+  animator: {fileID: 1178155758417492558}
   idleState: Idle
   attackTrigger: Attack
   hurtTrigger: Hurt
   dieTrigger: Die
   dieState: Die
-  attackWindup: 0.25
-  attackRecover: 0.25
+  attackWindup: 0.597
+  attackRecover: 1
+--- !u!114 &730014274846262245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519450849806918247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad69eca8c88e0094a975b3ba4a8fe3d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillsInventory
+  skills: []
+--- !u!114 &4139946973491524917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519450849806918247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8213441283005478da6abee34b047d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemsInventory
+  items: []
+--- !u!95 &1178155758417492558
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519450849806918247}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: e053bb4dfc7cba644bcc5c3340bbcf8f, type: 3}
+  m_Controller: {fileID: 9100000, guid: 66244bd6b46ece44bb0efab6a5a603c8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5264481265070905956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519450849806918247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b58309948ab2a6a4887ea3e4281c906f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimDriver
+  animator: {fileID: 1178155758417492558}
+  animationEvents:
+  - eventType: 0
+    trigger:
+      triggerName: 
 --- !u!1 &8506729014377834790
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,12 +248,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8506729014377834790}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.00000008544689, y: -0.0000013158892, z: -0.00000044703486, w: -1}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2809209549028179804}
+  m_Father: {fileID: 6231853750064660998}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4979058794670513355
 MeshFilter:
@@ -308,15 +377,20 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2196004506624635508, guid: e053bb4dfc7cba644bcc5c3340bbcf8f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2523773948484303545}
+      addedObject: {fileID: 2308939786238452423}
     - targetCorrespondingSourceObject: {fileID: 7997947301047521070, guid: e053bb4dfc7cba644bcc5c3340bbcf8f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2308939786238452423}
+      addedObject: {fileID: 2523773948484303545}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e053bb4dfc7cba644bcc5c3340bbcf8f, type: 3}
 --- !u!4 &2809209549028179804 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2196004506624635508, guid: e053bb4dfc7cba644bcc5c3340bbcf8f, type: 3}
+  m_PrefabInstance: {fileID: 4072827764056591656}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3766415100802248825 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e053bb4dfc7cba644bcc5c3340bbcf8f, type: 3}
   m_PrefabInstance: {fileID: 4072827764056591656}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &4543901370134850243 stripped

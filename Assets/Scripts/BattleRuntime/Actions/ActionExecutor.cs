@@ -11,9 +11,19 @@ namespace Actions
     {
         [SerializeField] private UI.DamagePopup damagePopup;
 
-        [Header("Approach Target")]
-        [SerializeField] private float approachDistance = 1.75f;
-        [SerializeField] private float moveSpeed = 17.5f;
+        [Header("Approach Movement")]
+        [SerializeField] private float approachDistance = 0.9f; 
+        [SerializeField] private float moveSpeed = 6f;
+
+        private IEnumerator MoveTo(Transform who, Vector3 targetPos, float speed)
+        {
+            if (!who) yield break;
+            while ((who.position - targetPos).sqrMagnitude > 0.0004f)
+            {
+                who.position = Vector3.MoveTowards(who.position, targetPos, speed * Time.deltaTime);
+                yield return null;
+            }
+        }
 
         public IEnumerator Execute(CharacterScript actor, UI.CommandDecision decision, List<CharacterScript> targets)
         {
@@ -49,16 +59,6 @@ namespace Actions
             }
         }
 
-        private IEnumerator MoveTo(Transform who, Vector3 targetPos, float speed)
-        {
-            if (!who) yield break;
-            while ((who.position - targetPos).sqrMagnitude > 0.0004f)
-            {
-                who.position = Vector3.MoveTowards(who.position, targetPos, speed * Time.deltaTime);
-                yield return null;
-            }
-        }
-
         private IEnumerator DoBasicAttack(CharacterScript actor, List<CharacterScript> targets)
         {
             if (targets == null || targets.Count == 0) yield break;
@@ -68,18 +68,27 @@ namespace Actions
             Vector3 startPos = actor.transform.position;
             Quaternion startRot = actor.transform.rotation;
 
-            Vector3 toT = t.transform.position - actor.transform.position; toT.y = 0f;
-            if (toT.sqrMagnitude > 0.0001f) actor.transform.rotation = Quaternion.LookRotation(toT);
+            Vector3 look = t.transform.position - actor.transform.position;
+            look.y = 0f;
+            if (look.sqrMagnitude > 0.0001f)
+                actor.transform.rotation = Quaternion.LookRotation(look);
 
-            Vector3 approachPos = t.transform.position - toT.normalized * Mathf.Max(0.05f, approachDistance);
-            approachPos.y = startPos.y; // keep on same plane
+            var anim = actor.GetComponent<AnimDriver>();
+            if (anim) anim.Fire(AnimDriver.AnimEvent.Approach);
+
+            Vector3 toTarget = (t.transform.position - actor.transform.position);
+            toTarget.y = 0f;
+            Vector3 approachPos = t.transform.position - toTarget.normalized * Mathf.Max(0.05f, approachDistance);
+            approachPos.y = startPos.y; 
             yield return MoveTo(actor.transform, approachPos, moveSpeed);
 
             actor.PlayAttack();
+            if (anim) anim.Fire(AnimDriver.AnimEvent.Attack); 
             yield return new WaitForSeconds(actor.attackWindup);
 
             int dmg = DamageCalculator.Physical(null, actor, t);
             t.SetHP(t.currentHP - dmg);
+
             if (damagePopup) damagePopup.Spawn(t.transform.position, dmg, false, false);
             if (t.currentHP > 0) t.PlayHurt();
 
@@ -92,11 +101,13 @@ namespace Actions
             actor.GainSP(1);
         }
 
-
         private IEnumerator DoSkill(CharacterScript actor, Data.SkillDefinition skill, List<CharacterScript> targets)
         {
             if (!skill) yield break;
-            if (!skill.TargetsSelfOnly && (targets == null || targets.Count == 0)) yield break;
+
+            if (!skill.TargetsSelfOnly && (targets == null || targets.Count == 0))
+                yield break;
+
             if (actor.currentSP < skill.spCost) yield break;
             actor.SetSP(actor.currentSP - skill.spCost);
 
@@ -104,49 +115,87 @@ namespace Actions
             Quaternion startRot = actor.transform.rotation;
 
             CharacterScript firstTarget = null;
-            if (targets != null) foreach (var z in targets) { if (z) { firstTarget = z; break; } }
+            if (!skill.TargetsSelfOnly && targets != null)
+            {
+                foreach (var z in targets) { if (z) { firstTarget = z; break; } }
+            }
 
             if (firstTarget)
             {
-                Vector3 toT = firstTarget.transform.position - actor.transform.position; toT.y = 0f;
-                if (toT.sqrMagnitude > 0.0001f) actor.transform.rotation = Quaternion.LookRotation(toT);
+                Vector3 to = firstTarget.transform.position - actor.transform.position;
+                to.y = 0f;
+                if (to.sqrMagnitude > 0.0001f)
+                    actor.transform.rotation = Quaternion.LookRotation(to);
 
-                Vector3 approachPos = firstTarget.transform.position - toT.normalized * Mathf.Max(0.05f, approachDistance);
+                var animDrv = actor.GetComponent<AnimDriver>();
+                if (animDrv) animDrv.Fire(AnimDriver.AnimEvent.Approach);
+
+                Vector3 approachPos = firstTarget.transform.position - to.normalized * Mathf.Max(0.05f, approachDistance);
                 approachPos.y = startPos.y;
                 yield return MoveTo(actor.transform, approachPos, moveSpeed);
             }
 
-            actor.PlayAttack();
+            {
+                var animDrv = actor.GetComponent<AnimDriver>();
+                bool usedOverride = false;
+                if (skill.overrideActorTrigger && animDrv && animDrv.animator && !string.IsNullOrEmpty(skill.skillTrigger.Name))
+                {
+                    skill.skillTrigger.ValidateOn(animDrv.animator);
+                    animDrv.animator.SetTrigger(skill.skillTrigger.Hash);
+                    usedOverride = true;
+                }
+
+                if (!usedOverride)
+                {
+                    actor.PlayAttack();
+                    if (animDrv) animDrv.Fire(AnimDriver.AnimEvent.SkillCast);
+                }
+            }
+
             yield return new WaitForSeconds(actor.attackWindup);
 
             if (skill.effectType == Data.SkillDefinition.EffectType.Damage)
             {
-                foreach (var tt in targets)
+                foreach (var t in targets)
                 {
-                    if (!tt) continue;
-                    int dmg = DamageCalculator.Physical(skill, actor, tt, skill.power, skill.overrideWithPower);
-                    tt.SetHP(tt.currentHP - dmg);
-                    if (damagePopup) damagePopup.Spawn(tt.transform.position, dmg, false, false);
-                    if (tt.currentHP > 0) tt.PlayHurt();
+                    if (!t) continue;
+                    int dmg = DamageCalculator.Physical(skill, actor, t, skill.power, skill.overrideWithPower);
+                    t.SetHP(t.currentHP - dmg);
+                    if (damagePopup) damagePopup.Spawn(t.transform.position, dmg, false, false);
+                    if (t.currentHP > 0) t.PlayHurt();
                 }
             }
             else if (skill.effectType == Data.SkillDefinition.EffectType.Heal)
             {
                 if ((targets == null || targets.Count == 0) && skill.TargetsSelfOnly)
                     targets = new System.Collections.Generic.List<CharacterScript> { actor };
-                foreach (var tt in targets)
+
+                foreach (var t in targets)
                 {
-                    if (!tt) continue;
-                    int heal = DamageCalculator.HealAmount(tt.maxHP, skill.power, skill.isPercent);
-                    tt.SetHP(tt.currentHP + heal);
-                    if (damagePopup) damagePopup.Spawn(tt.transform.position, heal, false, true);
+                    if (!t) continue;
+                    int heal = DamageCalculator.HealAmount(t.maxHP, skill.power, skill.isPercent);
+                    t.SetHP(t.currentHP + heal);
+                    if (damagePopup) damagePopup.Spawn(t.transform.position, heal, false, true);
                 }
             }
             else if (skill.effectType == Data.SkillDefinition.EffectType.ApplyStatus && skill.statusToApply)
             {
                 if ((targets == null || targets.Count == 0) && skill.TargetsSelfOnly)
                     targets = new System.Collections.Generic.List<CharacterScript> { actor };
-                foreach (var tt in targets) if (tt) tt.AddStatusEffect(skill.statusToApply);
+
+                foreach (var t in targets)
+                {
+                    if (!t) continue;
+                    t.AddStatusEffect(skill.statusToApply);
+
+                    var animT = t.GetComponent<AnimDriver>();
+                    if (animT) animT.Fire(AnimDriver.AnimEvent.StatusApply);
+                    if (skill.statusToApply && animT && animT.animator && !string.IsNullOrEmpty(skill.statusToApply.onApplyTrigger.Name))
+                    {
+                        skill.statusToApply.onApplyTrigger.ValidateOn(animT.animator);
+                        animT.animator.SetTrigger(skill.statusToApply.onApplyTrigger.Hash);
+                    }
+                }
             }
 
             yield return new WaitForSeconds(actor.attackRecover);

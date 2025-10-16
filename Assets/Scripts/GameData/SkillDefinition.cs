@@ -12,7 +12,6 @@ namespace Data
         public int spCost = 5;
         public Sprite icon;
 
-
         [EnumToggleButtons]
         public EffectType effectType = EffectType.Damage;
 
@@ -28,5 +27,12 @@ namespace Data
 
         [Header("Status (if ApplyStatus)")]
         public StatusEffectDefinition statusToApply;
+
+        [Header("Animation")]
+        [Tooltip("If enabled, this skill will fire the selected trigger on the ACTOR when used.")]
+        public bool overrideActorTrigger = false;
+
+        [Tooltip("Animator trigger to fire on the actor when this skill is used (dropdown).")]
+        public AnimatorTriggerRef skillTrigger;
     }
 }

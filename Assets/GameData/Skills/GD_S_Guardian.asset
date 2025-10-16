@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 610b08fe54a8f5945b483d4e3132ccda, type: 3}
+  m_Name: GD_S_Guardian
+  m_EditorClassIdentifier: Assembly-CSharp::Data.SkillDefinition
+  displayName: 
+  description: Increase party defense by 25%
+  spCost: 3
+  icon: {fileID: 0}
+  effectType: 2
+  TargetsAllies: 1
+  TargetsSelfOnly: 0
+  targetsAll: 1
+  power: 0
+  overrideWithPower: 0
+  isPercent: 0
+  statusToApply: {fileID: 11400000, guid: a6c223442be754f4fade3d06bd06d068, type: 2}
