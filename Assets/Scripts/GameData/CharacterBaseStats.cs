@@ -9,7 +9,7 @@ namespace Data
     public class CharacterBaseStats : ScriptableObject
     {
         [Header("Character Info")]
-        public string displayName;
+        public string characterName;
 
         [Header("Stats Info")]
         public int maxHP = 100;

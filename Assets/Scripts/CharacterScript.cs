@@ -123,13 +123,13 @@ public class CharacterScript : MonoBehaviour
         {
             baseMaxHP = characterStats.maxHP;
             baseMaxSP = characterStats.maxSP;
-            if (string.IsNullOrEmpty(characterName)) characterName = characterStats.displayName;
+            if (string.IsNullOrEmpty(characterName)) characterName = characterStats.characterName;
         }
         else if (unitType == UnitType.Enemy && enemyStats)
         {
             baseMaxHP = enemyStats.maxHP;
             baseMaxSP = enemyStats.maxSP;
-            if (string.IsNullOrEmpty(characterName)) characterName = enemyStats.displayName;
+            if (string.IsNullOrEmpty(characterName)) characterName = enemyStats.enemyName;
         }
 
         maxHP = baseMaxHP;

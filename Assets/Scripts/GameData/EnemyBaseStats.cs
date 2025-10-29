@@ -6,7 +6,7 @@ namespace Data
     public class EnemyBaseStats : ScriptableObject
     {
         [Header("Enemy Info")]
-        public string displayName;
+        public string enemyName;
 
         [Header("Stats Info")]
         public int maxHP = 80;

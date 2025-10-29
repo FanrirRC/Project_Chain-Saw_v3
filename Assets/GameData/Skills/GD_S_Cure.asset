@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 610b08fe54a8f5945b483d4e3132ccda, type: 3}
   m_Name: GD_S_Cure
   m_EditorClassIdentifier: Assembly-CSharp::Data.SkillDefinition
-  displayName: Cure
-  description: Heals target small HP
-  spCost: 3
   icon: {fileID: 0}
+  displayName: Cure
+  spCost: 3
+  description: 
+  targetSelection: 2
+  targetFaction: 1
   effectType: 0
-  TargetsAllies: 1
-  TargetsSelfOnly: 0
-  targetsAll: 1
   power: 20
-  overrideWithPower: 1
-  isPercent: 1
-  statusToApply: {fileID: 0}
+  potencyMode: 0
+  statuses: []
+  moveStyle: 0
+  animTrigger: 0

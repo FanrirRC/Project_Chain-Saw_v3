@@ -8,13 +8,23 @@ namespace Data
     [CreateAssetMenu(menuName = "RPG/Status Effect")]
     public class StatusEffectDefinition : ScriptableObject
     {
-        [Header("Info")]
-        public string displayName;
+        [BoxGroup("Status_Effect_Details", centerLabel: true)]
+        [HorizontalGroup("Status_Effect_Details/Split", Width = 80), HideLabel, PreviewField(80)]
         public Sprite icon;
-
-        [EnumToggleButtons]
-        public StatusCategory category = StatusCategory.Ailment;
+        [VerticalGroup("Status_Effect_Details/Split/Right")]
+        [LabelWidth(90)]
+        [HorizontalGroup("Status_Effect_Details/Split/Right/Split")]
+        public string displayName;
+        [VerticalGroup("Status_Effect_Details/Split/Right")]
+        [LabelWidth(90)]
+        [HorizontalGroup("Status_Effect_Details/Split/Right/Split", Width = 0.3f)]
         public int durationTurns = 3;
+        [VerticalGroup("Status_Effect_Details/Split/Right")]
+        [TextArea] public string description;
+
+        [EnumToggleButtons, HideLabel]
+        public StatusCategory category = StatusCategory.Ailment;
+
 
         [Header("Stat modifiers")]
         public int atkFlat;

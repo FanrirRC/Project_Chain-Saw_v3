@@ -11,9 +11,10 @@ namespace Actions
     {
         [SerializeField] private UI.DamagePopup damagePopup;
 
+        // === Approach/return movement (also used for skills with MoveStyle.Approach) ===
         [Header("Approach Movement")]
-        [SerializeField] private float approachDistance = 0.9f; 
-        [SerializeField] private float moveSpeed = 6f;
+        [SerializeField] private float approachDistance = 0.9f; // stop this far from target
+        [SerializeField] private float moveSpeed = 6f;          // units/sec
 
         private IEnumerator MoveTo(Transform who, Vector3 targetPos, float speed)
         {
@@ -39,6 +40,7 @@ namespace Actions
                     yield return DoItem(actor, decision.Item, targets);
                     break;
                 case UI.CommandDecision.DecisionType.Guard:
+                    // (guard behavior unchanged)
                     yield break;
             }
         }
@@ -65,143 +67,203 @@ namespace Actions
             var t = targets[0];
             if (!t) yield break;
 
+            // Cache transform to restore after the action
             Vector3 startPos = actor.transform.position;
             Quaternion startRot = actor.transform.rotation;
 
+            // Face target (Y-only)
             Vector3 look = t.transform.position - actor.transform.position;
             look.y = 0f;
             if (look.sqrMagnitude > 0.0001f)
                 actor.transform.rotation = Quaternion.LookRotation(look);
 
+            // Optional pre-anim + approach
             var anim = actor.GetComponent<AnimDriver>();
             if (anim) anim.Fire(AnimDriver.AnimEvent.Approach);
 
             Vector3 toTarget = (t.transform.position - actor.transform.position);
             toTarget.y = 0f;
             Vector3 approachPos = t.transform.position - toTarget.normalized * Mathf.Max(0.05f, approachDistance);
-            approachPos.y = startPos.y; 
+            approachPos.y = startPos.y;
             yield return MoveTo(actor.transform, approachPos, moveSpeed);
 
+            // Play attack + windup
             actor.PlayAttack();
-            if (anim) anim.Fire(AnimDriver.AnimEvent.Attack); 
+            if (anim) anim.Fire(AnimDriver.AnimEvent.Attack);
             yield return new WaitForSeconds(actor.attackWindup);
 
+            // Damage application
             int dmg = DamageCalculator.Physical(null, actor, t);
             t.SetHP(t.currentHP - dmg);
 
             if (damagePopup) damagePopup.Spawn(t.transform.position, dmg, false, false);
             if (t.currentHP > 0) t.PlayHurt();
 
+            // Recover
             yield return new WaitForSeconds(actor.attackRecover);
             actor.PlayIdle();
 
+            // Return & restore
             yield return MoveTo(actor.transform, startPos, moveSpeed);
             actor.transform.rotation = startRot;
 
+            // SP on basic
             actor.GainSP(1);
         }
 
-        private IEnumerator DoSkill(CharacterScript actor, Data.SkillDefinition skill, List<CharacterScript> targets)
+        private IEnumerator DoSkill(CharacterScript actor, SkillDefinition skill, List<CharacterScript> targets)
         {
             if (!skill) yield break;
 
-            if (!skill.TargetsSelfOnly && (targets == null || targets.Count == 0))
+            // Enforce targets if needed (legacy behavior: if not self-only and none supplied, bail)
+            if (skill.targetSelection != SkillDefinition.TargetSelection.SelfOnly && (targets == null || targets.Count == 0))
                 yield break;
 
+            // SP gate
             if (actor.currentSP < skill.spCost) yield break;
             actor.SetSP(actor.currentSP - skill.spCost);
 
+            // Cache for restore
             Vector3 startPos = actor.transform.position;
             Quaternion startRot = actor.transform.rotation;
 
-            CharacterScript firstTarget = null;
-            if (!skill.TargetsSelfOnly && targets != null)
+            // Choose focal (first live) target when not SelfOnly (for facing/approach)
+            CharacterScript focal = null;
+            if (skill.targetSelection != SkillDefinition.TargetSelection.SelfOnly && targets != null)
             {
-                foreach (var z in targets) { if (z) { firstTarget = z; break; } }
+                foreach (var z in targets) { if (z) { focal = z; break; } }
             }
 
-            if (firstTarget)
+            // Face + approach depending on MoveStyle
+            if (focal)
             {
-                Vector3 to = firstTarget.transform.position - actor.transform.position;
+                Vector3 to = focal.transform.position - actor.transform.position;
                 to.y = 0f;
                 if (to.sqrMagnitude > 0.0001f)
                     actor.transform.rotation = Quaternion.LookRotation(to);
 
-                var animDrv = actor.GetComponent<AnimDriver>();
-                if (animDrv) animDrv.Fire(AnimDriver.AnimEvent.Approach);
+                if (skill.moveStyle == SkillDefinition.MoveStyle.Approach)
+                {
+                    var animDrv = actor.GetComponent<AnimDriver>();
+                    if (animDrv) animDrv.Fire(AnimDriver.AnimEvent.Approach);
 
-                Vector3 approachPos = firstTarget.transform.position - to.normalized * Mathf.Max(0.05f, approachDistance);
-                approachPos.y = startPos.y;
-                yield return MoveTo(actor.transform, approachPos, moveSpeed);
+                    Vector3 approachPos = focal.transform.position - to.normalized * Mathf.Max(0.05f, approachDistance);
+                    approachPos.y = startPos.y;
+                    yield return MoveTo(actor.transform, approachPos, moveSpeed);
+                }
             }
 
+            // Animation trigger: use enum mapping if not Default; otherwise fall back to legacy PlayAttack + generic skill event
             {
                 var animDrv = actor.GetComponent<AnimDriver>();
                 bool usedOverride = false;
-                if (skill.overrideActorTrigger && animDrv && animDrv.animator && !string.IsNullOrEmpty(skill.skillTrigger.Name))
+
+                if (skill.animTrigger != SkillDefinition.AnimTrigger.Default && animDrv && animDrv.animator)
                 {
-                    skill.skillTrigger.ValidateOn(animDrv.animator);
-                    animDrv.animator.SetTrigger(skill.skillTrigger.Hash);
-                    usedOverride = true;
+                    string trigName = GetAnimTriggerName(skill.animTrigger);
+                    if (!string.IsNullOrEmpty(trigName))
+                    {
+                        animDrv.animator.SetTrigger(Animator.StringToHash(trigName));
+                        usedOverride = true;
+                    }
                 }
 
                 if (!usedOverride)
                 {
+                    // Legacy default behavior (kept): use attack anim for skills
                     actor.PlayAttack();
                     if (animDrv) animDrv.Fire(AnimDriver.AnimEvent.SkillCast);
                 }
             }
 
+            // Windup
             yield return new WaitForSeconds(actor.attackWindup);
 
-            if (skill.effectType == Data.SkillDefinition.EffectType.Damage)
+            // ===== EFFECT RESOLUTION =====
+            // 1) Damage / Heal based on EffectType + PotencyMode
+            if (skill.effectType == SkillDefinition.EffectType.Damage)
             {
                 foreach (var t in targets)
                 {
                     if (!t) continue;
-                    int dmg = DamageCalculator.Physical(skill, actor, t, skill.power, skill.overrideWithPower);
+                    // Interpreting power: FlatNumber (pass override=true) vs Percent (override=false, use calculator as percent if it supports)
+                    bool useFlat = (skill.potencyMode == SkillDefinition.PotencyMode.FlatNumber);
+                    int dmg = DamageCalculator.Physical(skill, actor, t, skill.power, useFlat);
                     t.SetHP(t.currentHP - dmg);
                     if (damagePopup) damagePopup.Spawn(t.transform.position, dmg, false, false);
                     if (t.currentHP > 0) t.PlayHurt();
                 }
             }
-            else if (skill.effectType == Data.SkillDefinition.EffectType.Heal)
+            else if (skill.effectType == SkillDefinition.EffectType.Heal)
             {
-                if ((targets == null || targets.Count == 0) && skill.TargetsSelfOnly)
-                    targets = new System.Collections.Generic.List<CharacterScript> { actor };
+                // If SelfOnly and no targets passed, heal the caster
+                var list = targets;
+                if ((list == null || list.Count == 0) && skill.targetSelection == SkillDefinition.TargetSelection.SelfOnly)
+                    list = new List<CharacterScript> { actor };
 
-                foreach (var t in targets)
+                foreach (var t in list)
                 {
                     if (!t) continue;
-                    int heal = DamageCalculator.HealAmount(t.maxHP, skill.power, skill.isPercent);
+                    bool isPercent = (skill.potencyMode == SkillDefinition.PotencyMode.Percent);
+                    int heal = DamageCalculator.HealAmount(t.maxHP, skill.power, isPercent);
                     t.SetHP(t.currentHP + heal);
                     if (damagePopup) damagePopup.Spawn(t.transform.position, heal, false, true);
                 }
             }
-            else if (skill.effectType == Data.SkillDefinition.EffectType.ApplyStatus && skill.statusToApply)
+            // EffectType.None: intentionally no direct HP change
+
+            // 2) Apply / Remove statuses
+            if (skill.statuses != null && skill.statuses.Count > 0)
             {
-                if ((targets == null || targets.Count == 0) && skill.TargetsSelfOnly)
-                    targets = new System.Collections.Generic.List<CharacterScript> { actor };
+                var list = targets;
+                if ((list == null || list.Count == 0) && skill.targetSelection == SkillDefinition.TargetSelection.SelfOnly)
+                    list = new List<CharacterScript> { actor };
 
-                foreach (var t in targets)
+                foreach (var entry in skill.statuses)
                 {
-                    if (!t) continue;
-                    t.AddStatusEffect(skill.statusToApply);
+                    if (entry == null || entry.status == null) continue;
 
-                    var animT = t.GetComponent<AnimDriver>();
-                    if (animT) animT.Fire(AnimDriver.AnimEvent.StatusApply);
-                    if (skill.statusToApply && animT && animT.animator && !string.IsNullOrEmpty(skill.statusToApply.onApplyTrigger.Name))
+                    foreach (var t in list)
                     {
-                        skill.statusToApply.onApplyTrigger.ValidateOn(animT.animator);
-                        animT.animator.SetTrigger(skill.statusToApply.onApplyTrigger.Hash);
+                        if (!t) continue;
+
+                        if (entry.op == SkillDefinition.StatusOp.Inflict)
+                        {
+                            t.AddStatusEffect(entry.status);
+
+                            // Optional: fire status-apply anim if present
+                            var animT = t.GetComponent<AnimDriver>();
+                            if (animT) animT.Fire(AnimDriver.AnimEvent.StatusApply);
+                            if (entry.status.onApplyTrigger.Name != null && animT && animT.animator && !string.IsNullOrEmpty(entry.status.onApplyTrigger.Name))
+                            {
+                                entry.status.onApplyTrigger.ValidateOn(animT.animator);
+                                animT.animator.SetTrigger(entry.status.onApplyTrigger.Hash);
+                            }
+                        }
+                        else // Remove
+                        {
+                            TryRemoveStatus(t, entry.status);
+                            var animT = t.GetComponent<AnimDriver>();
+                            if (animT) animT.Fire(AnimDriver.AnimEvent.StatusExpire);
+                            if (entry.status.onExpireTrigger.Name != null && animT && animT.animator && !string.IsNullOrEmpty(entry.status.onExpireTrigger.Name))
+                            {
+                                entry.status.onExpireTrigger.ValidateOn(animT.animator);
+                                animT.animator.SetTrigger(entry.status.onExpireTrigger.Hash);
+                            }
+                        }
                     }
                 }
             }
 
+            // Recover
             yield return new WaitForSeconds(actor.attackRecover);
             actor.PlayIdle();
 
-            yield return MoveTo(actor.transform, startPos, moveSpeed);
+            // Return & restore (only moved if we approached)
+            if (skill.moveStyle == SkillDefinition.MoveStyle.Approach)
+            {
+                yield return MoveTo(actor.transform, startPos, moveSpeed);
+            }
             actor.transform.rotation = startRot;
         }
 
@@ -209,6 +271,7 @@ namespace Actions
         {
             if (!item) yield break;
 
+            // consume 1 if you have an ItemsInventory
             var inv = actor.GetComponent<ItemsInventory>();
             if (inv && !inv.TryConsume(item, 1)) yield break;
 
@@ -228,6 +291,51 @@ namespace Actions
             }
 
             yield return null;
+        }
+
+        // ===== Helpers =====
+
+        private static string GetAnimTriggerName(SkillDefinition.AnimTrigger trig)
+        {
+            switch (trig)
+            {
+                case SkillDefinition.AnimTrigger.Attack: return "Attack";
+                case SkillDefinition.AnimTrigger.Hurt: return "Hurt";
+                case SkillDefinition.AnimTrigger.Die: return "Die";
+                case SkillDefinition.AnimTrigger.Shoot: return "Shoot";
+                case SkillDefinition.AnimTrigger.Revive: return "Revive";
+                case SkillDefinition.AnimTrigger.Spellcast_Attack: return "Spellcast - Attack";
+                case SkillDefinition.AnimTrigger.Spellcast_Healing: return "Spellcast - Healing";
+                case SkillDefinition.AnimTrigger.Items: return "Items";
+                case SkillDefinition.AnimTrigger.Block: return "Block";
+                default: return null; // Default → let legacy calls run
+            }
+        }
+
+        // Tries common remove APIs without forcing you to implement a new method.
+        private static System.Reflection.MethodInfo _cachedRemove;
+        private static bool TryRemoveStatus(CharacterScript target, StatusEffectDefinition def)
+        {
+            if (!target || !def) return false;
+
+            // Cache a remove method if available:
+            if (_cachedRemove == null)
+            {
+                // Try common names
+                var ty = target.GetType();
+                _cachedRemove = ty.GetMethod("RemoveStatusEffect", new[] { typeof(StatusEffectDefinition) })
+                                ?? ty.GetMethod("RemoveStatus", new[] { typeof(StatusEffectDefinition) })
+                                ?? ty.GetMethod("ClearStatusEffect", new[] { typeof(StatusEffectDefinition) });
+            }
+
+            if (_cachedRemove != null)
+            {
+                _cachedRemove.Invoke(target, new object[] { def });
+                return true;
+            }
+
+            // No remove method found—silently skip (non-breaking)
+            return false;
         }
     }
 }

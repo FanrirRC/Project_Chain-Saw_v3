@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 610b08fe54a8f5945b483d4e3132ccda, type: 3}
   m_Name: GD_S_Guardian
   m_EditorClassIdentifier: Assembly-CSharp::Data.SkillDefinition
-  displayName: 
-  description: Increase party defense by 25%
-  spCost: 3
   icon: {fileID: 0}
+  displayName: Guardian
+  spCost: 3
+  description: 
+  targetSelection: 1
+  targetFaction: 2
   effectType: 2
-  TargetsAllies: 1
-  TargetsSelfOnly: 0
-  targetsAll: 1
   power: 0
-  overrideWithPower: 0
-  isPercent: 0
-  statusToApply: {fileID: 11400000, guid: a6c223442be754f4fade3d06bd06d068, type: 2}
+  potencyMode: 0
+  statuses: []
+  moveStyle: 0
+  animTrigger: 0

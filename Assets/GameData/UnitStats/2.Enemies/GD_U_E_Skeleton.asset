@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf8cc1ae62c95a74eb87e3c9e8d577b8, type: 3}
   m_Name: GD_U_E_Skeleton
   m_EditorClassIdentifier: Assembly-CSharp::Data.EnemyBaseStats
-  displayName: Skeleton
+  enemyName: Skeleton
   maxHP: 30
   maxSP: 0
   atk: 5

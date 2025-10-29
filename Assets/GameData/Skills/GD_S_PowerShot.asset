@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 610b08fe54a8f5945b483d4e3132ccda, type: 3}
   m_Name: GD_S_PowerShot
   m_EditorClassIdentifier: Assembly-CSharp::Data.SkillDefinition
-  displayName: PowerShot
-  description: Deals small dmg
-  spCost: 2
   icon: {fileID: 0}
+  displayName: PowerShot
+  spCost: 2
+  description: 
   effectType: 0
   TargetsAllies: 0
   TargetsSelfOnly: 0
@@ -24,3 +24,6 @@ MonoBehaviour:
   overrideWithPower: 1
   isPercent: 0
   statusToApply: {fileID: 0}
+  overrideActorTrigger: 0
+  skillTrigger:
+    triggerName: 

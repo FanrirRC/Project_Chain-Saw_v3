@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d790062ca8180794193f45fd39fbdb25, type: 3}
   m_Name: Defense_UP
   m_EditorClassIdentifier: Assembly-CSharp::Data.StatusEffectDefinition
-  displayName: Defense UP
   icon: {fileID: 0}
-  category: 1
+  displayName: Defense UP
   durationTurns: 3
+  description: 
+  category: 1
   atkFlat: 0
   atkPercent: 0
   defFlat: 0
@@ -24,3 +25,9 @@ MonoBehaviour:
   damageTakenPercent: 0
   isDOT: 0
   dotPercentOfMaxHP: 0
+  onApplyTrigger:
+    triggerName: 
+  onExpireTrigger:
+    triggerName: 
+  onTickTrigger:
+    triggerName: 
