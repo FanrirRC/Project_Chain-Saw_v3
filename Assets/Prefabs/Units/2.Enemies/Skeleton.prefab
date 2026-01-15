@@ -59,10 +59,11 @@ MonoBehaviour:
   activeStatusEffects: []
   animator: {fileID: 3019036852487937462}
   idleState: Idle
-  attackTrigger: Attack
-  hurtTrigger: Hurt
-  dieTrigger: Die
   dieState: Die
+  attackTrigger: 1
+  hurtTrigger: 2
+  deathTrigger: 3
+  basicAttackMove: 0
   attackWindup: 0.25
   attackRecover: 0.25
 --- !u!95 &3019036852487937462

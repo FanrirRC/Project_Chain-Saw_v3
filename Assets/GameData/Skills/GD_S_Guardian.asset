@@ -16,11 +16,13 @@ MonoBehaviour:
   displayName: Guardian
   spCost: 3
   description: 
-  targetSelection: 1
-  targetFaction: 2
+  targetSelection: 2
+  targetFaction: 1
   effectType: 2
   power: 0
   potencyMode: 0
-  statuses: []
+  statuses:
+  - status: {fileID: 11400000, guid: a6c223442be754f4fade3d06bd06d068, type: 2}
+    op: 0
   moveStyle: 0
   animTrigger: 0

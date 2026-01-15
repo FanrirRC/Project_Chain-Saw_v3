@@ -151,10 +151,11 @@ MonoBehaviour:
   activeStatusEffects: []
   animator: {fileID: 1178155758417492558}
   idleState: Idle
-  attackTrigger: Attack
-  hurtTrigger: Hurt
-  dieTrigger: Die
   dieState: Die
+  attackTrigger: 1
+  hurtTrigger: 2
+  deathTrigger: 3
+  basicAttackMove: 0
   attackWindup: 0.597
   attackRecover: 1
 --- !u!114 &730014274846262245
@@ -169,7 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad69eca8c88e0094a975b3ba4a8fe3d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillsInventory
-  skills: []
+  skills:
+  - {fileID: 11400000, guid: 62abeb9955fd09249bdcc118ddb563dc, type: 2}
 --- !u!114 &4139946973491524917
 MonoBehaviour:
   m_ObjectHideFlags: 0

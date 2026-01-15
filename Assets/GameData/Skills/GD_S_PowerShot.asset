@@ -16,14 +16,11 @@ MonoBehaviour:
   displayName: PowerShot
   spCost: 2
   description: 
+  targetSelection: 2
+  targetFaction: 2
   effectType: 0
-  TargetsAllies: 0
-  TargetsSelfOnly: 0
-  targetsAll: 0
-  power: 10
-  overrideWithPower: 1
-  isPercent: 0
-  statusToApply: {fileID: 0}
-  overrideActorTrigger: 0
-  skillTrigger:
-    triggerName: 
+  power: 5
+  potencyMode: 0
+  statuses: []
+  moveStyle: 1
+  animTrigger: 4

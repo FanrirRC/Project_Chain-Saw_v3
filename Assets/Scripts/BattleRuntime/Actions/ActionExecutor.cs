@@ -115,7 +115,7 @@ namespace Actions
         {
             if (!skill) yield break;
 
-            // Enforce targets if needed (legacy behavior: if not self-only and none supplied, bail)
+            // Enforce targets if needed (if not self-only and none supplied, bail)
             if (skill.targetSelection != SkillDefinition.TargetSelection.SelfOnly && (targets == null || targets.Count == 0))
                 yield break;
 
@@ -127,7 +127,7 @@ namespace Actions
             Vector3 startPos = actor.transform.position;
             Quaternion startRot = actor.transform.rotation;
 
-            // Choose focal (first live) target when not SelfOnly (for facing/approach)
+            // Choose focal (first valid) target when not SelfOnly (for facing/approach)
             CharacterScript focal = null;
             if (skill.targetSelection != SkillDefinition.TargetSelection.SelfOnly && targets != null)
             {
@@ -153,7 +153,7 @@ namespace Actions
                 }
             }
 
-            // Animation trigger: use enum mapping if not Default; otherwise fall back to legacy PlayAttack + generic skill event
+            // Animation trigger override or default attack
             {
                 var animDrv = actor.GetComponent<AnimDriver>();
                 bool usedOverride = false;
@@ -170,7 +170,6 @@ namespace Actions
 
                 if (!usedOverride)
                 {
-                    // Legacy default behavior (kept): use attack anim for skills
                     actor.PlayAttack();
                     if (animDrv) animDrv.Fire(AnimDriver.AnimEvent.SkillCast);
                 }
@@ -186,9 +185,8 @@ namespace Actions
                 foreach (var t in targets)
                 {
                     if (!t) continue;
-                    // Interpreting power: FlatNumber (pass override=true) vs Percent (override=false, use calculator as percent if it supports)
                     bool useFlat = (skill.potencyMode == SkillDefinition.PotencyMode.FlatNumber);
-                    int dmg = DamageCalculator.Physical(skill, actor, t, skill.power, useFlat);
+                    int dmg = Actions.DamageCalculator.Physical(skill, actor, t, skill.power, useFlat);
                     t.SetHP(t.currentHP - dmg);
                     if (damagePopup) damagePopup.Spawn(t.transform.position, dmg, false, false);
                     if (t.currentHP > 0) t.PlayHurt();
@@ -196,7 +194,6 @@ namespace Actions
             }
             else if (skill.effectType == SkillDefinition.EffectType.Heal)
             {
-                // If SelfOnly and no targets passed, heal the caster
                 var list = targets;
                 if ((list == null || list.Count == 0) && skill.targetSelection == SkillDefinition.TargetSelection.SelfOnly)
                     list = new List<CharacterScript> { actor };
@@ -205,7 +202,7 @@ namespace Actions
                 {
                     if (!t) continue;
                     bool isPercent = (skill.potencyMode == SkillDefinition.PotencyMode.Percent);
-                    int heal = DamageCalculator.HealAmount(t.maxHP, skill.power, isPercent);
+                    int heal = Actions.DamageCalculator.HealAmount(t.maxHP, skill.power, isPercent);
                     t.SetHP(t.currentHP + heal);
                     if (damagePopup) damagePopup.Spawn(t.transform.position, heal, false, true);
                 }
@@ -228,29 +225,9 @@ namespace Actions
                         if (!t) continue;
 
                         if (entry.op == SkillDefinition.StatusOp.Inflict)
-                        {
-                            t.AddStatusEffect(entry.status);
-
-                            // Optional: fire status-apply anim if present
-                            var animT = t.GetComponent<AnimDriver>();
-                            if (animT) animT.Fire(AnimDriver.AnimEvent.StatusApply);
-                            if (entry.status.onApplyTrigger.Name != null && animT && animT.animator && !string.IsNullOrEmpty(entry.status.onApplyTrigger.Name))
-                            {
-                                entry.status.onApplyTrigger.ValidateOn(animT.animator);
-                                animT.animator.SetTrigger(entry.status.onApplyTrigger.Hash);
-                            }
-                        }
-                        else // Remove
-                        {
+                            t.AddStatusEffect(entry.status, actor);
+                        else
                             TryRemoveStatus(t, entry.status);
-                            var animT = t.GetComponent<AnimDriver>();
-                            if (animT) animT.Fire(AnimDriver.AnimEvent.StatusExpire);
-                            if (entry.status.onExpireTrigger.Name != null && animT && animT.animator && !string.IsNullOrEmpty(entry.status.onExpireTrigger.Name))
-                            {
-                                entry.status.onExpireTrigger.ValidateOn(animT.animator);
-                                animT.animator.SetTrigger(entry.status.onExpireTrigger.Hash);
-                            }
-                        }
                     }
                 }
             }
@@ -261,9 +238,8 @@ namespace Actions
 
             // Return & restore (only moved if we approached)
             if (skill.moveStyle == SkillDefinition.MoveStyle.Approach)
-            {
                 yield return MoveTo(actor.transform, startPos, moveSpeed);
-            }
+
             actor.transform.rotation = startRot;
         }
 
@@ -271,7 +247,7 @@ namespace Actions
         {
             if (!item) yield break;
 
-            // consume 1 if you have an ItemsInventory
+            // consume 1 if ItemsInventory exists
             var inv = actor.GetComponent<ItemsInventory>();
             if (inv && !inv.TryConsume(item, 1)) yield break;
 
@@ -280,14 +256,28 @@ namespace Actions
                 foreach (var t in targets)
                 {
                     if (!t) continue;
-                    int heal = DamageCalculator.HealAmount(t.maxHP, item.power, item.isPercent);
+                    bool isPercent = (item.potencyMode == Data.ItemDefinition.PotencyMode.Percent);
+                    int heal = Actions.DamageCalculator.HealAmount(t.maxHP, item.power, isPercent);
                     t.SetHP(t.currentHP + heal);
                     damagePopup?.Spawn(t.transform.position, heal, false, true);
                 }
             }
-            else if (item.effectType == Data.ItemDefinition.EffectType.ApplyStatus && item.statusToApply)
+            else if (item.effectType == Data.ItemDefinition.EffectType.ApplyStatus && item.statuses != null)
             {
-                foreach (var t in targets) if (t) t.AddStatusEffect(item.statusToApply);
+                foreach (var entry in item.statuses)
+                {
+                    if (entry == null || entry.status == null) continue;
+
+                    foreach (var t in targets)
+                    {
+                        if (!t) continue;
+
+                        if (entry.op == Data.ItemDefinition.StatusOp.Inflict)
+                            t.AddStatusEffect(entry.status, actor);
+                        else
+                            TryRemoveStatus(t, entry.status);
+                    }
+                }
             }
 
             yield return null;

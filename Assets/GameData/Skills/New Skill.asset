@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 610b08fe54a8f5945b483d4e3132ccda, type: 3}
-  m_Name: GD_S_Cure
+  m_Name: New Skill
   m_EditorClassIdentifier: Assembly-CSharp::Data.SkillDefinition
   icon: {fileID: 0}
-  displayName: Cure
-  spCost: 3
+  displayName: Poison
+  spCost: 1
   description: 
-  targetSelection: 2
-  targetFaction: 1
-  effectType: 1
-  power: 20
+  targetSelection: 1
+  targetFaction: 2
+  effectType: 2
+  power: 10
   potencyMode: 0
-  statuses: []
-  moveStyle: 0
+  statuses:
+  - status: {fileID: 11400000, guid: a253f5b219df51547ae73a8fd159c93c, type: 2}
+    op: 0
+  moveStyle: 1
   animTrigger: 0

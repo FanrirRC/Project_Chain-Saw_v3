@@ -11,8 +11,7 @@ public class CharacterScript : MonoBehaviour
 {
     public enum UnitType { Player, Enemy }
 
-    // ---- SP rules ----
-    public const int SP_CAP = 9; // absolute cap for the system (display + logic)
+    public const int SP_CAP = 9;
 
     [Header("Unit Details")]
     [EnumToggleButtons]
@@ -38,7 +37,7 @@ public class CharacterScript : MonoBehaviour
     [Header("Runtime Resources")]
     public int maxHP;
     public int currentHP;
-    public int maxSP;      // clamped to SP_CAP in InitializeFromData
+    public int maxSP;
     public int currentSP;
 
     [Serializable]
@@ -46,6 +45,7 @@ public class CharacterScript : MonoBehaviour
     {
         public StatusEffectDefinition effect;
         public int remainingTurns;
+        public CharacterScript inflictor;
     }
     public List<ActiveStatusEffect> activeStatusEffects = new();
 
@@ -59,13 +59,21 @@ public class CharacterScript : MonoBehaviour
     // ANIMATION
     // ------------------------------
     [Header("Animation")]
-    public Animator animator;               // assign in prefab
+    public Animator animator;
+
+    [Tooltip("Optional: direct state name to crossfade to when idling.")]
     public string idleState = "Idle";
-    public string attackTrigger = "Attack";
-    public string hurtTrigger = "Hurt";
-    public string dieTrigger = "Die";
-    [Tooltip("Optional: direct state name to crossfade to.")]
+
+    [Tooltip("Optional: direct state name to crossfade to on death (fallback if trigger not present).")]
     public string dieState = "Die";
+
+    [Header("Animation Triggers (Dropdowns)")]
+    public SkillDefinition.AnimTrigger attackTrigger = SkillDefinition.AnimTrigger.Attack;
+    public SkillDefinition.AnimTrigger hurtTrigger = SkillDefinition.AnimTrigger.Hurt;
+    public SkillDefinition.AnimTrigger deathTrigger = SkillDefinition.AnimTrigger.Die;
+
+    [Header("Basic Attack Movement (Default)")]
+    public SkillDefinition.MoveStyle basicAttackMove = SkillDefinition.MoveStyle.Approach;
 
     [Header("Animation Timings")]
     [Range(0f, 1f)] public float attackWindup = 0.25f;
@@ -76,27 +84,30 @@ public class CharacterScript : MonoBehaviour
         if (animator && !string.IsNullOrEmpty(idleState))
             animator.CrossFade(idleState, 0.05f, 0, 0f);
     }
+
     public void PlayAttack()
     {
         if (!animator) return;
-        if (!string.IsNullOrEmpty(hurtTrigger)) animator.ResetTrigger(hurtTrigger);
-        animator.SetTrigger(attackTrigger);
+        TryResetTrigger(attackTrigger == SkillDefinition.AnimTrigger.Attack ? hurtTrigger : attackTrigger);
+        FireAnim(attackTrigger);
     }
+
     public void PlayHurt()
     {
         if (!animator) return;
-        if (!string.IsNullOrEmpty(attackTrigger)) animator.ResetTrigger(attackTrigger);
-        animator.SetTrigger(hurtTrigger);
+        TryResetTrigger(hurtTrigger == SkillDefinition.AnimTrigger.Hurt ? attackTrigger : hurtTrigger);
+        FireAnim(hurtTrigger);
     }
+
     public void PlayDie()
     {
         if (!animator) return;
-        if (!string.IsNullOrEmpty(attackTrigger)) animator.ResetTrigger(attackTrigger);
-        if (!string.IsNullOrEmpty(hurtTrigger)) animator.ResetTrigger(hurtTrigger);
-        if (!string.IsNullOrEmpty(dieTrigger)) animator.SetTrigger(dieTrigger);
-        if (!string.IsNullOrEmpty(dieState)) animator.CrossFade(dieState, 0.05f, 0, 0f); // fallback
+        TryResetTrigger(attackTrigger);
+        TryResetTrigger(hurtTrigger);
+        FireAnim(deathTrigger);
+        if (!string.IsNullOrEmpty(dieState))
+            animator.CrossFade(dieState, 0.05f, 0, 0f);
     }
-    // ------------------------------
 
     private void Awake() => InitializeFromData();
 
@@ -107,10 +118,8 @@ public class CharacterScript : MonoBehaviour
 #if UNITY_EDITOR
         Undo.RecordObject(this, "Change Unit Type");
 #endif
-
         if (unitType == UnitType.Player) enemyStats = null;
         else characterStats = null;
-
 #if UNITY_EDITOR
         EditorUtility.SetDirty(this);
 #endif
@@ -133,12 +142,10 @@ public class CharacterScript : MonoBehaviour
         }
 
         maxHP = baseMaxHP;
-
-        // SP stage 2: clamp design value to the 0..SP_CAP range for gameplay & UI
         maxSP = Mathf.Clamp(baseMaxSP, 0, SP_CAP);
 
         currentHP = maxHP;
-        currentSP = 0; // start empty; tweak if you want to start with some SP
+        currentSP = 0;
         activeStatusEffects.Clear();
     }
 
@@ -183,7 +190,6 @@ public class CharacterScript : MonoBehaviour
         OnSPChanged?.Invoke(this);
     }
 
-    // ---- SP helpers (used by executor & skills) ----
     public void GainSP(int amount)
     {
         if (amount <= 0) return;
@@ -193,7 +199,6 @@ public class CharacterScript : MonoBehaviour
         OnSPChanged?.Invoke(this);
     }
 
-    /// <summary> Returns true if the spend succeeded. </summary>
     public bool SpendSP(int amount)
     {
         if (amount <= 0) return true;
@@ -203,13 +208,14 @@ public class CharacterScript : MonoBehaviour
         return true;
     }
 
-    public void AddStatusEffect(StatusEffectDefinition so)
+    public void AddStatusEffect(StatusEffectDefinition so, CharacterScript inflictor = null)
     {
         if (!so) return;
         activeStatusEffects.Add(new ActiveStatusEffect
         {
             effect = so,
-            remainingTurns = Mathf.Max(1, so.durationTurns)
+            remainingTurns = Mathf.Max(1, so.durationTurns),
+            inflictor = inflictor
         });
     }
 
@@ -219,15 +225,80 @@ public class CharacterScript : MonoBehaviour
         {
             var s = activeStatusEffects[i];
 
-            if (s.effect.isDOT && s.effect.dotPercentOfMaxHP > 0 && currentHP > 0)
+            if (s.effect && s.effect.dotActive && currentHP > 0)
             {
-                int dot = Actions.DamageCalculator.DotPercent(this, s.effect.dotPercentOfMaxHP);
-                SetHP(currentHP - dot);
+                var owner = (s.effect.dotSource == StatusEffectDefinition.DOTSourceOwner.Inflictor)
+                            ? (s.inflictor != null ? s.inflictor : this)
+                            : this;
+
+                int baseStat = GetStatByType(owner, s.effect.dotBaseStat);
+                int amount = 0;
+
+                if (s.effect.dotPotencyMode == PotencyMode.Percent)
+                {
+                    amount = Mathf.RoundToInt(baseStat * (s.effect.dotPower / 100f));
+                }
+                else
+                {
+                    amount = Mathf.Max(0, s.effect.dotPower);
+                }
+
+                if (amount > 0)
+                {
+                    SetHP(currentHP - amount);
+                    if (currentHP > 0) PlayHurt();
+                }
             }
 
             s.remainingTurns--;
             if (s.remainingTurns <= 0) activeStatusEffects.RemoveAt(i);
             else activeStatusEffects[i] = s;
+        }
+    }
+
+    public void FireAnim(SkillDefinition.AnimTrigger trig)
+    {
+        if (!animator || trig == SkillDefinition.AnimTrigger.Default) return;
+        string name = GetTriggerName(trig);
+        if (!string.IsNullOrEmpty(name))
+            animator.SetTrigger(Animator.StringToHash(name));
+    }
+
+    private void TryResetTrigger(SkillDefinition.AnimTrigger trig)
+    {
+        if (!animator || trig == SkillDefinition.AnimTrigger.Default) return;
+        string name = GetTriggerName(trig);
+        if (!string.IsNullOrEmpty(name))
+            animator.ResetTrigger(Animator.StringToHash(name));
+    }
+
+    private static string GetTriggerName(SkillDefinition.AnimTrigger trig)
+    {
+        switch (trig)
+        {
+            case SkillDefinition.AnimTrigger.Attack: return "Attack";
+            case SkillDefinition.AnimTrigger.Hurt: return "Hurt";
+            case SkillDefinition.AnimTrigger.Die: return "Die";
+            case SkillDefinition.AnimTrigger.Shoot: return "Shoot";
+            case SkillDefinition.AnimTrigger.Revive: return "Revive";
+            case SkillDefinition.AnimTrigger.Spellcast_Attack: return "Spellcast - Attack";
+            case SkillDefinition.AnimTrigger.Spellcast_Healing: return "Spellcast - Healing";
+            case SkillDefinition.AnimTrigger.Items: return "Items";
+            case SkillDefinition.AnimTrigger.Block: return "Block";
+            default: return null;
+        }
+    }
+
+    private int GetStatByType(CharacterScript who, StatType type)
+    {
+        if (who == null) who = this;
+        switch (type)
+        {
+            case StatType.ATK: return who.GetBaseATK();
+            case StatType.DEF: return who.GetBaseDEF();
+            case StatType.MaxHP: return who.maxHP;
+            case StatType.MaxSP: return who.maxSP;
+            default: return 0;
         }
     }
 }

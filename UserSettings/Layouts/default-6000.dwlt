@@ -15,16 +15,41 @@ MonoBehaviour:
   m_PixelRect:
     serializedVersion: 2
     x: 0
-    y: -1037
+    y: 43
     width: 1920
-    height: 1037
+    height: 989
   m_ShowMode: 4
-  m_Title: Project
-  m_RootView: {fileID: 2}
-  m_MinSize: {x: 875, y: 332}
+  m_Title: Game Database Editor
+  m_RootView: {fileID: 3}
+  m_MinSize: {x: 875, y: 432}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEditor.dll::UnityEditor.SplitView
+  m_Children:
+  - {fileID: 6}
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 36
+    width: 1920
+    height: 933
+  m_MinSize: {x: 300, y: 100}
+  m_MaxSize: {x: 24288, y: 16192}
+  vertical: 1
+  controlID: 47
+  draggingID: 0
+--- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37,22 +62,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 3}
-  - {fileID: 5}
   - {fileID: 4}
+  - {fileID: 2}
+  - {fileID: 5}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1920
-    height: 1037
-  m_MinSize: {x: 875, y: 332}
+    height: 989
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 36
   m_UseBottomView: 1
   m_BottomViewHeight: 20
---- !u!114 &3
+--- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,7 +99,7 @@ MonoBehaviour:
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
   m_LastLoadedLayoutName: 
---- !u!114 &4
+--- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,37 +115,11 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 1017
+    y: 969
     width: 1920
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
---- !u!114 &5
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Children:
-  - {fileID: 6}
-  - {fileID: 11}
-  m_Position:
-    serializedVersion: 2
-    x: 0
-    y: 36
-    width: 1920
-    height: 981
-  m_MinSize: {x: 300, y: 100}
-  m_MaxSize: {x: 24288, y: 16192}
-  vertical: 0
-  controlID: 112
-  draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -135,17 +134,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Children:
   - {fileID: 7}
-  - {fileID: 10}
+  - {fileID: 12}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1473
-    height: 981
-  m_MinSize: {x: 200, y: 100}
-  m_MaxSize: {x: 16192, y: 16192}
-  vertical: 1
-  controlID: 74
+    width: 1920
+    height: 933
+  m_MinSize: {x: 300, y: 100}
+  m_MaxSize: {x: 24288, y: 16192}
+  vertical: 0
+  controlID: 48
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -161,19 +160,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Children:
   - {fileID: 8}
-  - {fileID: 9}
+  - {fileID: 11}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1473
-    height: 705
+    height: 933
+  m_MinSize: {x: 200, y: 100}
+  m_MaxSize: {x: 16192, y: 16192}
+  vertical: 1
+  controlID: 49
+  draggingID: 0
+--- !u!114 &8
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children:
+  - {fileID: 9}
+  - {fileID: 10}
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1473
+    height: 655
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 75
+  controlID: 50
   draggingID: 0
---- !u!114 &8
+--- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,42 +216,13 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 301
-    height: 705
+    height: 655
   m_MinSize: {x: 201, y: 226}
   m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
   m_Selected: 0
-  m_LastSelected: 0
---- !u!114 &9
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: GameView
-  m_EditorClassIdentifier: 
-  m_Children: []
-  m_Position:
-    serializedVersion: 2
-    x: 301
-    y: 0
-    width: 1172
-    height: 705
-  m_MinSize: {x: 202, y: 226}
-  m_MaxSize: {x: 4002, y: 4026}
-  m_ActualView: {fileID: 15}
-  m_Panes:
-  - {fileID: 17}
-  - {fileID: 15}
-  - {fileID: 18}
-  - {fileID: 14}
-  m_Selected: 1
   m_LastSelected: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -238,25 +234,54 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: AttributesExampleWindow
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 301
+    y: 0
+    width: 1172
+    height: 655
+  m_MinSize: {x: 52, y: 76}
+  m_MaxSize: {x: 4002, y: 4026}
+  m_ActualView: {fileID: 13}
+  m_Panes:
+  - {fileID: 17}
+  - {fileID: 15}
+  - {fileID: 18}
+  - {fileID: 13}
+  m_Selected: 3
+  m_LastSelected: 3
+--- !u!114 &11
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: GameDatabaseEditor
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 705
+    y: 655
     width: 1473
-    height: 276
-  m_MinSize: {x: 231, y: 276}
-  m_MaxSize: {x: 10001, y: 10026}
-  m_ActualView: {fileID: 19}
+    height: 278
+  m_MinSize: {x: 821, y: 506}
+  m_MaxSize: {x: 4001, y: 4026}
+  m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 19}
   - {fileID: 20}
-  - {fileID: 12}
-  m_Selected: 0
+  - {fileID: 14}
+  m_Selected: 2
   m_LastSelected: 1
---- !u!114 &11
+--- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -274,51 +299,15 @@ MonoBehaviour:
     x: 1473
     y: 0
     width: 447
-    height: 981
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+    height: 933
+  m_MinSize: {x: 276, y: 76}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
-  - {fileID: 13}
+  - {fileID: 22}
   m_Selected: 0
   m_LastSelected: 1
---- !u!114 &12
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f62a84c0b148b0a4582bdd9f1a69e6d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SingularityGroup.HotReload.Editor::SingularityGroup.HotReload.Editor.HotReloadWindow
-  m_MinSize: {x: 50, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: ' Hot Reload'
-    m_Image: {fileID: 0}
-    m_Tooltip: 
-    m_TextWithWhitespace: " Hot Reload\u200B"
-  m_Pos:
-    serializedVersion: 2
-    x: 0
-    y: -296
-    width: 1472
-    height: 250
-  m_SerializedDataModeController:
-    m_DataMode: 0
-    m_PreferredDataMode: 0
-    m_SupportedDataModes: 
-    isAutomatic: 1
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
-    m_ContainerData: []
-    m_OverlaysVisible: 1
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -328,86 +317,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f683d99f24875748a6656966ca9cea0, type: 3}
+  m_Script: {fileID: -1806621427, guid: a4865f1ab4504ed8a368670db22f409c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Unity.2D.Tilemap.Editor::UnityEditor.Tilemaps.GridPaintPaletteWindow
-  m_MinSize: {x: 356, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Tile Palette
-    m_Image: {fileID: 0}
-    m_Tooltip: 
-    m_TextWithWhitespace: "Tile Palette\u200B"
-  m_Pos:
-    serializedVersion: 2
-    x: 1473
-    y: -1001
-    width: 446
-    height: 955
-  m_SerializedDataModeController:
-    m_DataMode: 0
-    m_PreferredDataMode: 0
-    m_SupportedDataModes: 
-    isAutomatic: 1
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData:
-    - dockPosition: 1
-      containerId: overlay-container--left
-      displayed: 1
-      id: Overlays/OverlayMenu
-      index: 0
-      contents: '{"m_Layout":1,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
-      floating: 0
-      collapsed: 0
-      snapOffset: {x: 24, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
-      snapCorner: 0
-      layout: 1
-      size: {x: 0, y: 0}
-      sizeOverridden: 0
-    m_ContainerData:
-    - containerId: overlay-toolbar__top
-      scrollOffset: 0
-    - containerId: overlay-toolbar__left
-      scrollOffset: 0
-    - containerId: overlay-container--left
-      scrollOffset: 0
-    - containerId: overlay-container--right
-      scrollOffset: 0
-    - containerId: overlay-toolbar__right
-      scrollOffset: 0
-    - containerId: overlay-toolbar__bottom
-      scrollOffset: 0
-    - containerId: Floating
-      scrollOffset: 0
-    m_OverlaysVisible: 1
---- !u!114 &14
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1482588904, guid: a4865f1ab4504ed8a368670db22f409c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Sirenix.OdinInspector.Editor.dll::Sirenix.OdinInspector.Editor.GettingStarted.GettingStartedWindow
+  m_EditorClassIdentifier: Sirenix.OdinInspector.Editor.dll::Sirenix.OdinInspector.Editor.AttributesExampleWindow
   m_MinSize: {x: 50, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
-    m_Text: GettingStartedWindow
+    m_Text: Attributes Example Window
     m_Image: {fileID: 0}
     m_Tooltip: 
-    m_TextWithWhitespace: "GettingStartedWindow\u200B"
+    m_TextWithWhitespace: "Attributes Example Window\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 362
-    y: 87
-    width: 1105
-    height: 633
+    x: 301
+    y: 79
+    width: 1170
+    height: 629
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -431,1849 +356,65 @@ MonoBehaviour:
     - Name: inspectorTargetSerialized
       Entry: 6
       Data: 
-    - Name: Pages
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Sirenix.OdinInspector.Editor.GettingStarted.GettingStartedPage,
-        Sirenix.OdinInspector.Editor]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 1|Sirenix.OdinInspector.Editor.GettingStarted.TutorialPage, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Get started with Odin Inspector
-    - Name: TitleIcon
-      Entry: 3
-      Data: 148
-    - Name: FooterSize
-      Entry: 4
-      Data: 80
-    - Name: Tutorials
-      Entry: 7
-      Data: 2|System.Collections.Generic.List`1[[Sirenix.OdinInspector.Editor.GettingStarted.Tutorial,
-        Sirenix.OdinInspector.Editor]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 6
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Odin Attributes Overview
-    - Name: Description
-      Entry: 1
-      Data: The best way to get started using Odin is to open the Attributes Overview
-        window found at Tools > Odin > Inspector > Attribute Overview.
-    - Name: Icon
-      Entry: 3
-      Data: 1312
-    - Name: Difficulty
-      Entry: 3
-      Data: 1
-    - Name: OnClick
-      Entry: 7
-      Data: 3|System.Action, mscorlib
-    - Name: target
-      Entry: 7
-      Data: 4|Sirenix.OdinInspector.Editor.GettingStarted.GettingStartedWindowData+<>c,
-        Sirenix.OdinInspector.Editor
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: declaringType
-      Entry: 7
-      Data: 5|System.RuntimeType, mscorlib
-    - Name: 
-      Entry: 1
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.GettingStartedWindowData+<>c,
-        Sirenix.OdinInspector.Editor
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_7
-    - Name: delegateType
-      Entry: 7
-      Data: 6|System.RuntimeType, mscorlib
-    - Name: 
-      Entry: 1
-      Data: System.Action, mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: signature
-      Entry: 7
-      Data: 7|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: ChildPage
-      Entry: 6
-      Data: 
-    - Name: Enabled
-      Entry: 6
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: The Static Inspector
-    - Name: Description
-      Entry: 1
-      Data: If you're a programmer, then you're likely going find the static inspector
-        helpful during debugging and testing. Just open up the window, and start
-        using it! You can find the utility under 'Tools > Odin > Inspector > Static
-        Inspector'.
-    - Name: Icon
-      Entry: 3
-      Data: 1312
-    - Name: Difficulty
-      Entry: 3
-      Data: 1
-    - Name: OnClick
-      Entry: 7
-      Data: 8|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_8
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 9|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: ChildPage
-      Entry: 6
-      Data: 
-    - Name: Enabled
-      Entry: 6
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Odin Editor Windows
-    - Name: Description
-      Entry: 1
-      Data: Learn how you can use Odin to rapidly create custom Editor Windows to
-        help organize your project data. This is where Odin can really help boost
-        your workflow.
-    - Name: Icon
-      Entry: 3
-      Data: 721
-    - Name: Difficulty
-      Entry: 3
-      Data: 1
-    - Name: OnClick
-      Entry: 6
-      Data: 
-    - Name: ChildPage
-      Entry: 7
-      Data: 10|Sirenix.OdinInspector.Editor.GettingStarted.TutorialPage, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Editor Windows
-    - Name: TitleIcon
-      Entry: 3
-      Data: 1312
-    - Name: FooterSize
-      Entry: 4
-      Data: 80
-    - Name: Tutorials
-      Entry: 7
-      Data: 11|System.Collections.Generic.List`1[[Sirenix.OdinInspector.Editor.GettingStarted.Tutorial,
-        Sirenix.OdinInspector.Editor]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 5
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Import package
-    - Name: Description
-      Entry: 6
-      Data: 
-    - Name: Icon
-      Entry: 3
-      Data: 721
-    - Name: Difficulty
-      Entry: 3
-      Data: 0
-    - Name: OnClick
-      Entry: 7
-      Data: 12|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_9
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 13|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: ChildPage
-      Entry: 6
-      Data: 
-    - Name: Enabled
-      Entry: 7
-      Data: 14|System.Func`1[[System.Boolean, mscorlib]], mscorlib
-    - Name: declaringType
-      Entry: 7
-      Data: 15|System.RuntimeType, mscorlib
-    - Name: 
-      Entry: 1
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.GettingStartedWindowData,
-        Sirenix.OdinInspector.Editor
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: methodName
-      Entry: 1
-      Data: EditorTutorialIsNotImported
-    - Name: delegateType
-      Entry: 7
-      Data: 16|System.RuntimeType, mscorlib
-    - Name: 
-      Entry: 1
-      Data: System.Func`1[[System.Boolean, mscorlib]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: signature
-      Entry: 7
-      Data: 17|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Basic Odin Editor Window
-    - Name: Description
-      Entry: 1
-      Data: Inherit from OdinEditorWindow instead of EditorWindow. This will enable
-        you to render fields, properties and methods and make editor windows using
-        attributes, without writing any custom editor code.
-    - Name: Icon
-      Entry: 3
-      Data: 609
-    - Name: Difficulty
-      Entry: 3
-      Data: 1
-    - Name: OnClick
-      Entry: 6
-      Data: 
-    - Name: ChildPage
-      Entry: 6
-      Data: 
-    - Name: Enabled
-      Entry: 7
-      Data: 18|System.Func`1[[System.Boolean, mscorlib]], mscorlib
-    - Name: declaringType
-      Entry: 9
-      Data: 15
-    - Name: methodName
-      Entry: 1
-      Data: EditorTutorialIsImported
-    - Name: delegateType
-      Entry: 9
-      Data: 16
-    - Name: signature
-      Entry: 7
-      Data: 19|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 7
-      Data: 20|System.Collections.Generic.List`1[[System.ValueTuple`2[[System.String,
-        mscorlib],[System.Action, mscorlib]], mscorlib]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: System.ValueTuple`2[[System.String, mscorlib],[System.Action, mscorlib]],
-        mscorlib
-    - Name: Item1
-      Entry: 1
-      Data: Open window
-    - Name: Item2
-      Entry: 7
-      Data: 21|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_10
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 22|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: System.ValueTuple`2[[System.String, mscorlib],[System.Action, mscorlib]],
-        mscorlib
-    - Name: Item1
-      Entry: 1
-      Data: Open script
-    - Name: Item2
-      Entry: 7
-      Data: 23|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_11
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 24|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Odin Menu Editor Windows
-    - Name: Description
-      Entry: 1
-      Data: Derive from OdinMenuEditorWindow to create windows that inspect a custom
-        tree of target objects. These are great for organizing your project, and
-        managing Scriptable Objects etc. Odin itself uses this to draw its preferences
-        window.
-    - Name: Icon
-      Entry: 3
-      Data: 609
-    - Name: Difficulty
-      Entry: 3
-      Data: 1
-    - Name: OnClick
-      Entry: 6
-      Data: 
-    - Name: ChildPage
-      Entry: 6
-      Data: 
-    - Name: Enabled
-      Entry: 7
-      Data: 25|System.Func`1[[System.Boolean, mscorlib]], mscorlib
-    - Name: declaringType
-      Entry: 9
-      Data: 15
-    - Name: methodName
-      Entry: 1
-      Data: EditorTutorialIsImported
-    - Name: delegateType
-      Entry: 9
-      Data: 16
-    - Name: signature
-      Entry: 7
-      Data: 26|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 7
-      Data: 27|System.Collections.Generic.List`1[[System.ValueTuple`2[[System.String,
-        mscorlib],[System.Action, mscorlib]], mscorlib]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: System.ValueTuple`2[[System.String, mscorlib],[System.Action, mscorlib]],
-        mscorlib
-    - Name: Item1
-      Entry: 1
-      Data: Open window
-    - Name: Item2
-      Entry: 7
-      Data: 28|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_12
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 29|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: System.ValueTuple`2[[System.String, mscorlib],[System.Action, mscorlib]],
-        mscorlib
-    - Name: Item1
-      Entry: 1
-      Data: Open script
-    - Name: Item2
-      Entry: 7
-      Data: 30|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_13
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 31|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Override GetTargets()
-    - Name: Description
-      Entry: 1
-      Data: Odin Editor Windows are not limited to drawing themselves; you can override
-        GetTarget() or GetTargets() to make them display scriptable objects, components
-        or any arbitrary types (except value types like structs).
-    - Name: Icon
-      Entry: 3
-      Data: 609
-    - Name: Difficulty
-      Entry: 3
-      Data: 3
-    - Name: OnClick
-      Entry: 6
-      Data: 
-    - Name: ChildPage
-      Entry: 6
-      Data: 
-    - Name: Enabled
-      Entry: 7
-      Data: 32|System.Func`1[[System.Boolean, mscorlib]], mscorlib
-    - Name: declaringType
-      Entry: 9
-      Data: 15
-    - Name: methodName
-      Entry: 1
-      Data: EditorTutorialIsImported
-    - Name: delegateType
-      Entry: 9
-      Data: 16
-    - Name: signature
-      Entry: 7
-      Data: 33|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 7
-      Data: 34|System.Collections.Generic.List`1[[System.ValueTuple`2[[System.String,
-        mscorlib],[System.Action, mscorlib]], mscorlib]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: System.ValueTuple`2[[System.String, mscorlib],[System.Action, mscorlib]],
-        mscorlib
-    - Name: Item1
-      Entry: 1
-      Data: Open window
-    - Name: Item2
-      Entry: 7
-      Data: 35|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_14
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 36|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: System.ValueTuple`2[[System.String, mscorlib],[System.Action, mscorlib]],
-        mscorlib
-    - Name: Item1
-      Entry: 1
-      Data: Open script
-    - Name: Item2
-      Entry: 7
-      Data: 37|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_15
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 38|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Quickly inspect objects
-    - Name: Description
-      Entry: 1
-      Data: Call OdinEditorWindow.InspectObject(myObj) to quickly pop up an editor
-        window for any given object. This is a great way to quickly debug objects
-        or make custom editor windows on the spot!
-    - Name: Icon
-      Entry: 3
-      Data: 609
-    - Name: Difficulty
-      Entry: 3
-      Data: 2
-    - Name: OnClick
-      Entry: 6
-      Data: 
-    - Name: ChildPage
-      Entry: 6
-      Data: 
-    - Name: Enabled
-      Entry: 7
-      Data: 39|System.Func`1[[System.Boolean, mscorlib]], mscorlib
-    - Name: declaringType
-      Entry: 9
-      Data: 15
-    - Name: methodName
-      Entry: 1
-      Data: EditorTutorialIsImported
-    - Name: delegateType
-      Entry: 9
-      Data: 16
-    - Name: signature
-      Entry: 7
-      Data: 40|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 7
-      Data: 41|System.Collections.Generic.List`1[[System.ValueTuple`2[[System.String,
-        mscorlib],[System.Action, mscorlib]], mscorlib]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: System.ValueTuple`2[[System.String, mscorlib],[System.Action, mscorlib]],
-        mscorlib
-    - Name: Item1
-      Entry: 1
-      Data: Open window
-    - Name: Item2
-      Entry: 7
-      Data: 42|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_16
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 43|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: System.ValueTuple`2[[System.String, mscorlib],[System.Action, mscorlib]],
-        mscorlib
-    - Name: Item1
-      Entry: 1
-      Data: Open script
-    - Name: Item2
-      Entry: 7
-      Data: 44|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_17
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 45|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Enabled
-      Entry: 6
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Custom Drawers
-    - Name: Description
-      Entry: 1
-      Data: Making custom drawers in Odin is 10x faster and 10x more powerful than
-        in vanilla Unity. Drawers are strongly typed, with generic resolution.
-    - Name: Icon
-      Entry: 3
-      Data: 721
-    - Name: Difficulty
-      Entry: 3
-      Data: 2
-    - Name: OnClick
-      Entry: 6
-      Data: 
-    - Name: ChildPage
-      Entry: 7
-      Data: 46|Sirenix.OdinInspector.Editor.GettingStarted.TutorialPage, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Custom Drawers
-    - Name: TitleIcon
-      Entry: 3
-      Data: 456
-    - Name: FooterSize
-      Entry: 4
-      Data: 80
-    - Name: Tutorials
-      Entry: 7
-      Data: 47|System.Collections.Generic.List`1[[Sirenix.OdinInspector.Editor.GettingStarted.Tutorial,
-        Sirenix.OdinInspector.Editor]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Import example scene
-    - Name: Description
-      Entry: 6
-      Data: 
-    - Name: Icon
-      Entry: 3
-      Data: 721
-    - Name: Difficulty
-      Entry: 3
-      Data: 0
-    - Name: OnClick
-      Entry: 7
-      Data: 48|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_18
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 49|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: ChildPage
-      Entry: 6
-      Data: 
-    - Name: Enabled
-      Entry: 7
-      Data: 50|System.Func`1[[System.Boolean, mscorlib]], mscorlib
-    - Name: declaringType
-      Entry: 9
-      Data: 15
-    - Name: methodName
-      Entry: 1
-      Data: CustomDrawersIsNotImported
-    - Name: delegateType
-      Entry: 9
-      Data: 16
-    - Name: signature
-      Entry: 7
-      Data: 51|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Open example scene
-    - Name: Description
-      Entry: 6
-      Data: 
-    - Name: Icon
-      Entry: 3
-      Data: 1457
-    - Name: Difficulty
-      Entry: 3
-      Data: 2
-    - Name: OnClick
-      Entry: 7
-      Data: 52|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_19
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 53|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: ChildPage
-      Entry: 6
-      Data: 
-    - Name: Enabled
-      Entry: 7
-      Data: 54|System.Func`1[[System.Boolean, mscorlib]], mscorlib
-    - Name: declaringType
-      Entry: 9
-      Data: 15
-    - Name: methodName
-      Entry: 1
-      Data: CustomDrawersIsImported
-    - Name: delegateType
-      Entry: 9
-      Data: 16
-    - Name: signature
-      Entry: 7
-      Data: 55|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Enabled
-      Entry: 6
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Attribute Processors
-    - Name: Description
-      Entry: 1
-      Data: You can take complete control over how Odin finds its members to display
-        and which attributes to put on those members. This can be extremely useful
-        for automation and providing support and editor customizations for third-party
-        libraries you don't own the code for.
-    - Name: Icon
-      Entry: 3
-      Data: 721
-    - Name: Difficulty
-      Entry: 3
-      Data: 3
-    - Name: OnClick
-      Entry: 6
-      Data: 
-    - Name: ChildPage
-      Entry: 7
-      Data: 56|Sirenix.OdinInspector.Editor.GettingStarted.TutorialPage, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Attribute Processors
-    - Name: TitleIcon
-      Entry: 3
-      Data: 456
-    - Name: FooterSize
-      Entry: 4
-      Data: 80
-    - Name: Tutorials
-      Entry: 7
-      Data: 57|System.Collections.Generic.List`1[[Sirenix.OdinInspector.Editor.GettingStarted.Tutorial,
-        Sirenix.OdinInspector.Editor]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 4
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Attribute Processors
-    - Name: Description
-      Entry: 1
-      Data: Need to add attributes to 3rd party code? Can't access source code for
-        an asset and still want to modify the inspector? With custom attribute processors
-        and Odin Inspector, you can do that!
-    - Name: Icon
-      Entry: 3
-      Data: 1323
-    - Name: Difficulty
-      Entry: 3
-      Data: 3
-    - Name: OnClick
-      Entry: 7
-      Data: 58|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_20
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 59|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: ChildPage
-      Entry: 6
-      Data: 
-    - Name: Enabled
-      Entry: 6
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Property Processors
-    - Name: Description
-      Entry: 1
-      Data: Odin property processors are the code that tells Odin what data to display
-        and what attributes are associated with that data. This means that creating
-        a custom property processor can allow you to alter the properties that are
-        shown in the inspector. This is done without altering the original code in
-        any way and works with 3rd party code where you may not have access to the
-        source code. Property processors let you define your own rules for how properties
-        are made, both globally or just for select types.
-    - Name: Icon
-      Entry: 3
-      Data: 1323
-    - Name: Difficulty
-      Entry: 3
-      Data: 3
-    - Name: OnClick
-      Entry: 7
-      Data: 60|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_21
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 61|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: ChildPage
-      Entry: 6
-      Data: 
-    - Name: Enabled
-      Entry: 6
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Import example scene
-    - Name: Description
-      Entry: 6
-      Data: 
-    - Name: Icon
-      Entry: 3
-      Data: 721
-    - Name: Difficulty
-      Entry: 3
-      Data: 0
-    - Name: OnClick
-      Entry: 7
-      Data: 62|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_22
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 63|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: ChildPage
-      Entry: 6
-      Data: 
-    - Name: Enabled
-      Entry: 7
-      Data: 64|System.Func`1[[System.Boolean, mscorlib]], mscorlib
-    - Name: declaringType
-      Entry: 9
-      Data: 15
-    - Name: methodName
-      Entry: 1
-      Data: AttributeProcessorsIsNotImported
-    - Name: delegateType
-      Entry: 9
-      Data: 16
-    - Name: signature
-      Entry: 7
-      Data: 65|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Open example scene
-    - Name: Description
-      Entry: 6
-      Data: 
-    - Name: Icon
-      Entry: 3
-      Data: 1457
-    - Name: Difficulty
-      Entry: 3
-      Data: 3
-    - Name: OnClick
-      Entry: 7
-      Data: 66|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_23
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 67|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: ChildPage
-      Entry: 6
-      Data: 
-    - Name: Enabled
-      Entry: 7
-      Data: 68|System.Func`1[[System.Boolean, mscorlib]], mscorlib
-    - Name: declaringType
-      Entry: 9
-      Data: 15
-    - Name: methodName
-      Entry: 1
-      Data: AttributeProcessorsIsImported
-    - Name: delegateType
-      Entry: 9
-      Data: 16
-    - Name: signature
-      Entry: 7
-      Data: 69|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Enabled
-      Entry: 6
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: RPG Editor (sample project)
-    - Name: Description
-      Entry: 1
-      Data: This project showcases Odin Editor Windows, Odin Selectors, various attribute
-        combinations, and custom drawers to build a feature-rich editor window for
-        managing scriptable objects.
-    - Name: Icon
-      Entry: 3
-      Data: 721
-    - Name: Difficulty
-      Entry: 3
-      Data: 3
-    - Name: OnClick
-      Entry: 6
-      Data: 
-    - Name: ChildPage
-      Entry: 7
-      Data: 70|Sirenix.OdinInspector.Editor.GettingStarted.TutorialPage, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: RPG Editor (sample project)
-    - Name: TitleIcon
-      Entry: 3
-      Data: 456
-    - Name: FooterSize
-      Entry: 4
-      Data: 80
-    - Name: Tutorials
-      Entry: 7
-      Data: 71|System.Collections.Generic.List`1[[Sirenix.OdinInspector.Editor.GettingStarted.Tutorial,
-        Sirenix.OdinInspector.Editor]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 3
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Import package
-    - Name: Description
-      Entry: 6
-      Data: 
-    - Name: Icon
-      Entry: 3
-      Data: 721
-    - Name: Difficulty
-      Entry: 3
-      Data: 0
-    - Name: OnClick
-      Entry: 7
-      Data: 72|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_24
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 73|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: ChildPage
-      Entry: 6
-      Data: 
-    - Name: Enabled
-      Entry: 7
-      Data: 74|System.Func`1[[System.Boolean, mscorlib]], mscorlib
-    - Name: declaringType
-      Entry: 9
-      Data: 15
-    - Name: methodName
-      Entry: 1
-      Data: RPGSampleProjectIsNotImported
-    - Name: delegateType
-      Entry: 9
-      Data: 16
-    - Name: signature
-      Entry: 7
-      Data: 75|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Open RPG editor window
-    - Name: Description
-      Entry: 1
-      Data: You can also find the window under Tools > Odin > Demos
-    - Name: Icon
-      Entry: 3
-      Data: 1312
-    - Name: Difficulty
-      Entry: 3
-      Data: 3
-    - Name: OnClick
-      Entry: 7
-      Data: 76|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_25
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 77|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: ChildPage
-      Entry: 6
-      Data: 
-    - Name: Enabled
-      Entry: 7
-      Data: 78|System.Func`1[[System.Boolean, mscorlib]], mscorlib
-    - Name: declaringType
-      Entry: 9
-      Data: 15
-    - Name: methodName
-      Entry: 1
-      Data: RPGSampleProjectIsImported
-    - Name: delegateType
-      Entry: 9
-      Data: 16
-    - Name: signature
-      Entry: 7
-      Data: 79|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.GettingStarted.Tutorial, Sirenix.OdinInspector.Editor
-    - Name: Title
-      Entry: 1
-      Data: Open script
-    - Name: Description
-      Entry: 1
-      Data: Go and explore how things are implemented, the script for the window
-        itself is a great place to start
-    - Name: Icon
-      Entry: 3
-      Data: 609
-    - Name: Difficulty
-      Entry: 3
-      Data: 3
-    - Name: OnClick
-      Entry: 7
-      Data: 80|System.Action, mscorlib
-    - Name: target
-      Entry: 9
-      Data: 4
-    - Name: declaringType
-      Entry: 9
-      Data: 5
-    - Name: methodName
-      Entry: 1
-      Data: <.cctor>b__7_26
-    - Name: delegateType
-      Entry: 9
-      Data: 6
-    - Name: signature
-      Entry: 7
-      Data: 81|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: ChildPage
-      Entry: 6
-      Data: 
-    - Name: Enabled
-      Entry: 7
-      Data: 82|System.Func`1[[System.Boolean, mscorlib]], mscorlib
-    - Name: declaringType
-      Entry: 9
-      Data: 15
-    - Name: methodName
-      Entry: 1
-      Data: RPGSampleProjectIsImported
-    - Name: delegateType
-      Entry: 9
-      Data: 16
-    - Name: signature
-      Entry: 7
-      Data: 83|System.Type[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Enabled
-      Entry: 6
-      Data: 
-    - Name: Visible
-      Entry: 6
-      Data: 
-    - Name: ActionButtons
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
   labelWidth: 0.33
   windowPadding: {x: 4, y: 4, z: 4, w: 4}
   useScrollView: 1
   drawUnityEditorPreview: 0
   wrappedAreaMaxHeight: 1000
-  verticalSlideTRaw: 0
-  horizontalSlideTRaw: 0
-  selectedProduct: 0
-  VerticalSlideT: 0
-  HorizontalSlideT: 0
+  menuTreeConfig:
+    AutoScrollOnSelectionChanged: 1
+    DrawScrollView: 1
+    AutoHandleKeyboardNavigation: 1
+    DrawSearchToolbar: 1
+    UseCachedExpandedStates: 1
+    AutoFocusSearchBar: 1
+    SelectMenuItemsOnMouseDown: 0
+    ScrollPos: {x: 0, y: 0}
+    SearchTerm: 
+    SearchToolbarHeight: 24
+    EXPERIMENTAL_INTERNAL_DrawFlatTreeFastNoLayout: 0
+    EXPERIMENTAL_INTERNAL_SparseFixedLayouting: 0
+    ConfirmSlecectionOnDoubleClick: 1
+  menuWidth: 250
+  selectedItems:
+  - Groups/Horizontal Group
+  resizableMenuWidth: 1
+--- !u!114 &14
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dacd7c6fb1f06048bfd904b643afd1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::GameDatabaseEditor
+  m_MinSize: {x: 820, y: 480}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Game Database Editor
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+    m_TextWithWhitespace: "Game Database Editor\u200B"
+  m_Pos:
+    serializedVersion: 2
+    x: 0
+    y: 734
+    width: 1472
+    height: 252
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_ContainerData: []
+    m_OverlaysVisible: 1
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -2296,9 +437,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 301
-    y: -1001
+    y: 79
     width: 1170
-    height: 679
+    height: 629
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -2316,7 +457,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 1170, y: 658}
+  m_TargetSize: {x: 1170, y: 608}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -2333,8 +474,8 @@ MonoBehaviour:
     vZoomLockedByDefault: 0
     m_HBaseRangeMin: -585
     m_HBaseRangeMax: 585
-    m_VBaseRangeMin: -329
-    m_VBaseRangeMax: 329
+    m_VBaseRangeMin: -304
+    m_VBaseRangeMax: 304
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -2353,9 +494,9 @@ MonoBehaviour:
       x: 0
       y: 21
       width: 1170
-      height: 658
+      height: 608
     m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 585, y: 329}
+    m_Translation: {x: 585, y: 304}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
@@ -2363,12 +504,12 @@ MonoBehaviour:
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
       x: -585
-      y: -329
+      y: -304
       width: 1170
-      height: 658
+      height: 608
     m_MinimalGUI: 1
   m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 1170, y: 679}
+  m_LastWindowPixelSize: {x: 1170, y: 629}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -2397,9 +538,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: -1001
+    y: 79
     width: 300
-    height: 679
+    height: 629
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -2414,9 +555,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 86e1ffff8ae1ffff8ee1ffff92e1ffff96e1ffffa0e1ffffa4e1ffffa8e1fffface1ffffb0e1ffffc0e1ffffc4e1ffffc8e1ffff0ce2ffff10e2ffff1ee2ffff4ecd000054cd0000
+      m_SelectedIDs: c02bffff
+      m_LastClickedID: -54336
+      m_ExpandedIDs: b0d6ffff0cfbffff2ab50000e2b500002ab600006eb60000d2b60000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -2433,7 +574,7 @@ MonoBehaviour:
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
-        m_ClientGUIView: {fileID: 8}
+        m_ClientGUIView: {fileID: 9}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -2463,9 +604,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 301
-    y: -1001
+    y: 79
     width: 1170
-    height: 679
+    height: 645
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -2536,11 +677,11 @@ MonoBehaviour:
       displayed: 0
       id: unity-search-toolbar
       index: 2
-      contents: '{"m_Layout":1,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":1,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":1,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":1,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 1
       layout: 1
       size: {x: 0, y: 0}
@@ -2592,11 +733,11 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Light Settings
       index: 1
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 24, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
@@ -2620,11 +761,11 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Cloth Constraints
       index: 3
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
@@ -2634,11 +775,11 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Cloth Collisions
       index: 5
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
@@ -2690,11 +831,11 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Occlusion Culling
       index: 6
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 24, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
@@ -2704,11 +845,11 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Physics Debugger
       index: 8
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
@@ -2718,11 +859,11 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Scene Visibility
       index: 9
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
@@ -2732,11 +873,11 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Particles
       index: 11
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 24, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
@@ -2774,11 +915,11 @@ MonoBehaviour:
       displayed: 0
       id: Brush Attributes
       index: 2
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
@@ -2788,11 +929,11 @@ MonoBehaviour:
       displayed: 0
       id: Terrain Tools
       index: 0
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
@@ -2802,11 +943,11 @@ MonoBehaviour:
       displayed: 0
       id: Brush Masks
       index: 1
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
@@ -2816,11 +957,11 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Lighting Visualization Colors
       index: 0
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 24, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
@@ -2844,11 +985,11 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Open Tile Palette
       index: 0
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
@@ -2858,24 +999,24 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Tile Palette Clipboard
       index: 2
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
       sizeOverridden: 0
     - dockPosition: 1
       containerId: overlay-container--right
-      displayed: 1
+      displayed: 0
       id: Scene View/Tilemap Focus
       index: 4
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":25.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       layout: 4
@@ -2886,11 +1027,11 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/Tile Palette Brush Pick
       index: 7
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
@@ -2900,11 +1041,11 @@ MonoBehaviour:
       displayed: 0
       id: APV Overlay
       index: 10
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
@@ -2942,11 +1083,11 @@ MonoBehaviour:
       displayed: 0
       id: SceneView/CamerasOverlay
       index: 12
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
@@ -2956,11 +1097,11 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/PBR Validation Settings
       index: 13
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
@@ -2970,11 +1111,11 @@ MonoBehaviour:
       displayed: 0
       id: Scene View/TrailRenderer
       index: 14
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":25.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
@@ -3039,7 +1180,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_WindowGUID: cc27987af1a868c49b0894db9c0f5429
   m_Gizmos: 1
-  m_OverrideSceneCullingMask: 0
+  m_OverrideSceneCullingMask: 6917529027641081856
   m_SceneIsLit: 0
   m_SceneLighting: 1
   m_2DMode: 0
@@ -3048,9 +1189,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -0.60917157, y: 1.5644999, z: 1.3910093}
+    m_Target: {x: 424.90915, y: 241.49641, z: 0.21812949}
     speed: 2
-    m_Value: {x: 7.408381, y: 2.8759384, z: -4.6028295}
+    m_Value: {x: 424.90915, y: 241.49641, z: 0.21812949}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -3083,7 +1224,7 @@ MonoBehaviour:
         m_Value: 1
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
-      m_Size: {x: 0.55, y: 0.55}
+      m_Size: {x: 1, y: 1}
     zGrid:
       m_Fade:
         m_Target: 0
@@ -3096,17 +1237,17 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.06255014, y: 0.78497046, z: -0.08034583, w: -0.6111083}
+    m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
-    m_Value: {x: 0.15327163, y: -0.2332877, z: 0.037264593, w: 0.95952904}
+    m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1.5591753
+    m_Target: 479.09833
     speed: 2
-    m_Value: 7.94498
+    m_Value: 479.09833
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_CameraSettings:
     m_Speed: 1
     m_SpeedNormalized: 0.5
@@ -3158,9 +1299,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 301
-    y: -1001
+    y: 79
     width: 1170
-    height: 679
+    height: 645
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -3281,9 +1422,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: -296
+    y: 750
     width: 1472
-    height: 250
+    height: 236
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -3322,10 +1463,10 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 94}
-    m_SelectedIDs: 6ecc0000
-    m_LastClickedID: 52334
-    m_ExpandedIDs: 00000000c0c20000c2c20000cec20000d0c20000d2c20000d4c20000d6c20000d8c20000dac20000dcc20000b4c300006acc000000ca9a3b
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: a2c40000
+    m_LastClickedID: 50338
+    m_ExpandedIDs: 00000000f2c30000f4c30000f6c30000f8c30000fac30000fcc30000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -3342,7 +1483,7 @@ MonoBehaviour:
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
-      m_ClientGUIView: {fileID: 10}
+      m_ClientGUIView: {fileID: 11}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -3354,7 +1495,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c0c20000c2c20000c4c20000c6c20000c8c20000cac20000ccc20000cec20000d0c20000d2c20000d4c20000d6c20000d8c20000dac20000dcc20000
+    m_ExpandedIDs: 00000000f2c30000f4c30000f6c30000f8c30000fac30000fcc30000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -3380,8 +1521,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 92b90000
+    m_LastClickedInstanceID: 47506
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000e83a0100
     m_RenameOverlay:
@@ -3400,7 +1541,7 @@ MonoBehaviour:
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
-      m_ClientGUIView: {fileID: 10}
+      m_ClientGUIView: {fileID: 11}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -3434,9 +1575,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: -296
+    y: 524
     width: 1472
-    height: 250
+    height: 462
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -3470,9 +1611,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 1473
-    y: -1001
+    y: 79
     width: 446
-    height: 955
+    height: 907
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -3497,3 +1638,67 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_PreviewWindow: {fileID: 0}
+--- !u!114 &22
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f683d99f24875748a6656966ca9cea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.2D.Tilemap.Editor::UnityEditor.Tilemaps.GridPaintPaletteWindow
+  m_MinSize: {x: 356, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Tile Palette
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+    m_TextWithWhitespace: "Tile Palette\u200B"
+  m_Pos:
+    serializedVersion: 2
+    x: 1473
+    y: -1001
+    width: 446
+    height: 955
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData:
+    - dockPosition: 1
+      containerId: overlay-container--left
+      displayed: 1
+      id: Overlays/OverlayMenu
+      index: 0
+      contents: '{"m_Layout":1,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 24, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 1
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
+    m_ContainerData:
+    - containerId: overlay-toolbar__top
+      scrollOffset: 0
+    - containerId: overlay-toolbar__left
+      scrollOffset: 0
+    - containerId: overlay-container--left
+      scrollOffset: 0
+    - containerId: overlay-container--right
+      scrollOffset: 0
+    - containerId: overlay-toolbar__right
+      scrollOffset: 0
+    - containerId: overlay-toolbar__bottom
+      scrollOffset: 0
+    - containerId: Floating
+      scrollOffset: 0
+    m_OverlaysVisible: 1
