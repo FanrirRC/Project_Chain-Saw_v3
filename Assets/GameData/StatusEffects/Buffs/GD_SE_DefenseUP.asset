@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d790062ca8180794193f45fd39fbdb25, type: 3}
-  m_Name: New Status Effect 1
+  m_Name: GD_SE_DefenseUP
   m_EditorClassIdentifier: Assembly-CSharp::Data.StatusEffectDefinition
-  icon: {fileID: 0}
-  displayName: Poison
+  icon: {fileID: 21300000, guid: bb17380a79b7d8648b72df109940242a, type: 3}
+  displayName: Defense UP
   durationTurns: 3
   description: 
-  category: 0
-  stat: 0
-  power: 0
-  potencyMode: 0
-  dotActive: 1
-  dotSource: 1
-  dotBaseStat: 3
-  dotPower: 25
+  category: 1
+  stat: 2
+  power: 25
+  potencyMode: 1
+  dotActive: 0
+  dotSource: 0
+  dotBaseStat: 1
+  dotPower: 5
   dotPotencyMode: 1

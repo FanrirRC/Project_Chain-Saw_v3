@@ -1,5 +1,5 @@
 using UnityEngine;
-using Data; // for StatType and PotencyMode
+using Data;
 
 namespace Actions
 {
@@ -14,18 +14,57 @@ namespace Actions
             int defStat = GetEffectiveDEF(defender);
             int raw = Mathf.Max(0, atkStat - defStat);
 
-            // If you later add global damage dealt/taken %, apply here.
-            float dealtMul = 1f;
-            float takenMul = 1f;
-
-            int final = Mathf.RoundToInt(raw * dealtMul * takenMul);
+            int final = Mathf.RoundToInt(raw);
             return Mathf.Max(0, final);
         }
 
         public static int HealAmount(int targetMax, int amount, bool isPercent)
             => isPercent ? Mathf.RoundToInt(targetMax * (amount / 100f)) : amount;
 
-        // --- Effective stats (use new status model) ---
+        public static int SkillDamage(Data.SkillDefinition skill, CharacterScript attacker, CharacterScript defender)
+        {
+            if (skill == null || attacker == null || defender == null) return 0;
+            int baseStat = GetPotencyBaseStat(skill.potencyStat, attacker, defender, isHeal: false);
+            int amount = ApplyPotency(skill.power, skill.potencyMode == Data.SkillDefinition.PotencyMode.Percent, baseStat);
+            // keep defense interaction (simple and consistent)
+            int defStat = GetEffectiveDEF(defender);
+            return Mathf.Max(0, amount - defStat);
+        }
+        public static int SkillHeal(Data.SkillDefinition skill, CharacterScript source, CharacterScript target)
+        {
+            if (skill == null || source == null || target == null) return 0;
+            int baseStat = GetPotencyBaseStat(skill.potencyStat, source, target, isHeal: true);
+            int amount = ApplyPotency(skill.power, skill.potencyMode == Data.SkillDefinition.PotencyMode.Percent, baseStat);
+            return Mathf.Max(0, amount);
+        }
+        public static int ItemHeal(Data.ItemDefinition item, CharacterScript user, CharacterScript target)
+        {
+            if (item == null || user == null || target == null) return 0;
+            int baseStat = GetPotencyBaseStat(item.potencyStat, user, target, isHeal: true);
+            bool isPercent = item.potencyMode == Data.ItemDefinition.PotencyMode.Percent;
+            int amount = ApplyPotency(item.power, isPercent, baseStat);
+            return Mathf.Max(0, amount);
+        }
+        private static int ApplyPotency(int power, bool isPercent, int baseStat)
+        {
+            if (!isPercent) return Mathf.Max(0, power);
+            return Mathf.RoundToInt(baseStat * (power / 100f));
+        }
+        private static int GetPotencyBaseStat(StatType stat, CharacterScript source, CharacterScript target, bool isHeal)
+        {
+            // For MaxHP/MaxSP it makes more sense to base on the TARGET (esp. healing items).
+            // For ATK/DEF it makes more sense to base on the SOURCE.
+            switch (stat)
+            {
+                case StatType.MaxHP: return target != null ? target.maxHP : 0;
+                case StatType.MaxSP: return target != null ? target.maxSP : 0;
+                case StatType.DEF: return source != null ? GetEffectiveDEF(source) : 0;
+                case StatType.ATK: return source != null ? GetEffectiveATK(source) : 0;
+                default: return 0;
+            }
+        }
+
+        // --- Effective stats ---
 
         public static int GetEffectiveATK(CharacterScript c)
         {

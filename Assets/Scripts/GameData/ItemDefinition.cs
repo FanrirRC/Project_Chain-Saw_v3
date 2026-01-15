@@ -15,7 +15,7 @@ namespace Data
         public class StatusEntry
         {
             [HorizontalGroup("Row")]
-            [HideLabel] public StatusEffectDefinition status; // hide field label
+            [HideLabel] public StatusEffectDefinition status;
 
             [HorizontalGroup("Row")]
             [LabelText("Op")] public StatusOp op = StatusOp.Inflict;
@@ -35,6 +35,11 @@ namespace Data
 
         [BoxGroup("Effect", centerLabel: true)]
         [EnumToggleButtons] public EffectType effectType = EffectType.Heal;
+
+        [HorizontalGroup("Effect/Split")]
+        [VerticalGroup("Effect/Split/Left")]
+        [LabelText("Based On")]
+        public StatType potencyStat = StatType.MaxHP;
 
         [HorizontalGroup("Effect/Split")]
         [VerticalGroup("Effect/Split/Left")]

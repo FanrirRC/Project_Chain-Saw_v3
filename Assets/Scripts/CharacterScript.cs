@@ -46,6 +46,8 @@ public class CharacterScript : MonoBehaviour
         public StatusEffectDefinition effect;
         public int remainingTurns;
         public CharacterScript inflictor;
+
+        public bool skipDecrementThisTurn; // if status effect is self-applied this turn, do not decrement duration this tick (only once)
     }
     public List<ActiveStatusEffect> activeStatusEffects = new();
 
@@ -61,10 +63,7 @@ public class CharacterScript : MonoBehaviour
     [Header("Animation")]
     public Animator animator;
 
-    [Tooltip("Optional: direct state name to crossfade to when idling.")]
     public string idleState = "Idle";
-
-    [Tooltip("Optional: direct state name to crossfade to on death (fallback if trigger not present).")]
     public string dieState = "Die";
 
     [Header("Animation Triggers (Dropdowns)")]
@@ -73,11 +72,19 @@ public class CharacterScript : MonoBehaviour
     public SkillDefinition.AnimTrigger deathTrigger = SkillDefinition.AnimTrigger.Die;
 
     [Header("Basic Attack Movement (Default)")]
-    public SkillDefinition.MoveStyle basicAttackMove = SkillDefinition.MoveStyle.Approach;
+    public SkillDefinition.MoveStyle basicAttackMove = SkillDefinition.MoveStyle.Melee;
 
     [Header("Animation Timings")]
     [Range(0f, 1f)] public float attackWindup = 0.25f;
     [Range(0f, 1f)] public float attackRecover = 0.25f;
+
+    private static UI.DamagePopup _cachedPopup;
+    private static UI.DamagePopup GetPopup()
+    {
+        if (_cachedPopup != null) return _cachedPopup;
+        _cachedPopup = UnityEngine.Object.FindFirstObjectByType<UI.DamagePopup>();
+        return _cachedPopup;
+    }
 
     public void PlayIdle()
     {
@@ -211,11 +218,13 @@ public class CharacterScript : MonoBehaviour
     public void AddStatusEffect(StatusEffectDefinition so, CharacterScript inflictor = null)
     {
         if (!so) return;
+        bool isSelfAppliedThisTurn = (inflictor != null && inflictor == this);
         activeStatusEffects.Add(new ActiveStatusEffect
         {
             effect = so,
             remainingTurns = Mathf.Max(1, so.durationTurns),
-            inflictor = inflictor
+            inflictor = inflictor,
+            skipDecrementThisTurn = isSelfAppliedThisTurn
         });
     }
 
@@ -246,8 +255,17 @@ public class CharacterScript : MonoBehaviour
                 if (amount > 0)
                 {
                     SetHP(currentHP - amount);
+                    var popup = GetPopup();
+                    if (popup) popup.Spawn(transform.position, amount, false, false);
                     if (currentHP > 0) PlayHurt();
                 }
+            }
+
+            if (s.skipDecrementThisTurn)
+            {
+                s.skipDecrementThisTurn = false;
+                activeStatusEffects[i] = s;
+                continue;
             }
 
             s.remainingTurns--;

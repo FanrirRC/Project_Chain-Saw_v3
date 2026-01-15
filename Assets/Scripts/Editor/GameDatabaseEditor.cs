@@ -102,6 +102,8 @@ public class GameDatabaseEditor : EditorWindow
 
     private readonly Dictionary<Category, List<UnityEngine.Object>> _assetsByCategory = new();
 
+    private string _assetNameBuffer = string.Empty;
+
     private void OnEnable()
     {
         _searchField = new UnityEditor.IMGUI.Controls.SearchField
@@ -258,6 +260,18 @@ public class GameDatabaseEditor : EditorWindow
             }
             SirenixEditorGUI.EndHorizontalToolbar();
 
+            if (_selectedAsset != null) // Renames the asset file
+            {
+                EditorGUILayout.Space(4);
+                EditorGUI.BeginChangeCheck();
+                _assetNameBuffer = EditorGUILayout.DelayedTextField(new GUIContent("Asset File Name"), _assetNameBuffer);
+                if (EditorGUI.EndChangeCheck())
+                {
+                    TryRenameSelectedAsset(_assetNameBuffer);
+                }
+                EditorGUILayout.Space(4);
+            }
+
             _inspectorScroll = EditorGUILayout.BeginScrollView(_inspectorScroll);
 
             if (_selectedAsset != null)
@@ -274,6 +288,36 @@ public class GameDatabaseEditor : EditorWindow
 
             EditorGUILayout.EndScrollView();
         }
+    }
+
+    private void TryRenameSelectedAsset(string desiredName)
+    {
+        if (_selectedAsset == null) return;
+        desiredName = (desiredName ?? string.Empty).Trim();
+        if (string.IsNullOrEmpty(desiredName)) { _assetNameBuffer = _selectedAsset.name; return; }
+        if (desiredName == _selectedAsset.name) return;
+        string path = AssetDatabase.GetAssetPath(_selectedAsset);
+        if (string.IsNullOrEmpty(path)) { _assetNameBuffer = _selectedAsset.name; return; }
+        string folder = Path.GetDirectoryName(path)?.Replace("\\", "/");
+        if (string.IsNullOrEmpty(folder)) { _assetNameBuffer = _selectedAsset.name; return; }
+        // Make unique if needed
+        string uniquePath = AssetDatabase.GenerateUniqueAssetPath($"{folder}/{desiredName}.asset");
+        string uniqueName = Path.GetFileNameWithoutExtension(uniquePath);
+        string err = AssetDatabase.RenameAsset(path, uniqueName);
+        if (!string.IsNullOrEmpty(err))
+        {
+            Debug.LogWarning($"Rename failed: {err}");
+            _assetNameBuffer = _selectedAsset.name;
+            return;
+        }
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        // Re-sort list (so renamed assets stay ordered)
+        var list = GetAssets(_selectedCategory);
+        list.Sort((a, b) => string.Compare(a != null ? a.name : "", b != null ? b.name : "", StringComparison.OrdinalIgnoreCase));
+        // Keep buffer synced
+        _assetNameBuffer = _selectedAsset.name;
+        Repaint();
     }
 
     private void DrawVerticalSeparator()
@@ -333,6 +377,7 @@ public class GameDatabaseEditor : EditorWindow
 
         var list = GetAssets(cat);
         list.Add(asset);
+        list.Sort((a, b) => string.Compare(a != null ? a.name : "", b != null ? b.name : "", StringComparison.OrdinalIgnoreCase));
         SelectAsset(asset);
     }
 
@@ -369,6 +414,8 @@ public class GameDatabaseEditor : EditorWindow
 
         ClearSelection();
         _selectedAsset = obj;
+        _assetNameBuffer = _selectedAsset != null ? _selectedAsset.name : string.Empty;
+
         if (_selectedAsset != null)
         {
             _propertyTree = PropertyTree.Create(_selectedAsset);
@@ -389,5 +436,7 @@ public class GameDatabaseEditor : EditorWindow
             _propertyTree = null;
         }
         _selectedAsset = null;
+
+        _assetNameBuffer = string.Empty;
     }
 }

@@ -16,9 +16,10 @@ MonoBehaviour:
   displayName: PowerShot
   spCost: 2
   description: 
-  targetSelection: 2
+  targetSelection: 1
   targetFaction: 2
   effectType: 0
+  potencyStat: 1
   power: 5
   potencyMode: 0
   statuses: []

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: add7ef82f3a62434aa5b1ab5c8734f4a, type: 3}
-  m_Name: 1.GD_U_P_ChainSaw
+  m_Name: GD_PU_ChainSaw
   m_EditorClassIdentifier: Assembly-CSharp::Data.CharacterBaseStats
   characterName: ChainSaw
   maxHP: 20

@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d790062ca8180794193f45fd39fbdb25, type: 3}
-  m_Name: New Status Effect
+  m_Name: GD_SE_Poison
   m_EditorClassIdentifier: Assembly-CSharp::Data.StatusEffectDefinition
   icon: {fileID: 0}
-  displayName: Guard
+  displayName: Poison
   durationTurns: 3
   description: 
-  category: 1
-  stat: 2
-  power: 25
-  potencyMode: 1
-  dotActive: 0
-  dotSource: 0
-  dotBaseStat: 1
+  category: 0
+  stat: 0
+  power: 0
+  potencyMode: 0
+  dotActive: 1
+  dotSource: 1
+  dotBaseStat: 3
   dotPower: 5
   dotPotencyMode: 1

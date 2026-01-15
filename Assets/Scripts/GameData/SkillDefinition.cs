@@ -28,7 +28,7 @@ namespace Data
         }
 
         // ====== 3) TARGETING ======
-        public enum TargetSelection { SelfOnly, Single, Multi, Random }
+        public enum TargetSelection { SelfOnly, Single, Multi }
 
         [Flags]
         public enum TargetFaction
@@ -39,7 +39,7 @@ namespace Data
         }
 
         // ====== 4) ANIMATION ======
-        public enum MoveStyle { Approach, Stand }
+        public enum MoveStyle { Melee, Ranged }
 
         public enum AnimTrigger
         {
@@ -93,6 +93,11 @@ namespace Data
         [HorizontalGroup("Skill_Effect/Split")]
         [Header("Effect Potency")]
         [VerticalGroup("Skill_Effect/Split/Left")]
+        [LabelText("Based On")]
+        public StatType potencyStat = StatType.ATK;
+
+        [HorizontalGroup("Skill_Effect/Split")]
+        [VerticalGroup("Skill_Effect/Split/Left")]
         public int power = 10;
 
         [HorizontalGroup("Skill_Effect/Split")]
@@ -111,11 +116,11 @@ namespace Data
         // Two side-by-side columns under Animation:
         [HorizontalGroup("Animation/Split", Width = 0.5f)]
         [VerticalGroup("Animation/Split/Left")]
-        [LabelText("Movement")] // rendered as vertical buttons by custom drawer
-        public MoveStyle moveStyle = MoveStyle.Approach;
+        [LabelText("Movement")]
+        public MoveStyle moveStyle = MoveStyle.Melee;
 
         [VerticalGroup("Animation/Split/Right")]
-        [LabelText("Trigger")]  // standard enum dropdown (not toggle buttons)
+        [LabelText("Trigger")]
         public AnimTrigger animTrigger = AnimTrigger.Default;
 
         // =======================

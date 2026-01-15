@@ -19,6 +19,7 @@ MonoBehaviour:
   targetSelection: 2
   targetFaction: 1
   effectType: 2
+  potencyStat: 1
   power: 0
   potencyMode: 0
   statuses:

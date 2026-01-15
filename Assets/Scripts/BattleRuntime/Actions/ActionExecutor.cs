@@ -11,10 +11,9 @@ namespace Actions
     {
         [SerializeField] private UI.DamagePopup damagePopup;
 
-        // === Approach/return movement (also used for skills with MoveStyle.Approach) ===
-        [Header("Approach Movement")]
-        [SerializeField] private float approachDistance = 0.9f; // stop this far from target
-        [SerializeField] private float moveSpeed = 6f;          // units/sec
+        [Header("Melee Movement")]
+        [SerializeField] private float meleeDistance = 0.9f;
+        [SerializeField] private float moveSpeed = 6f;
 
         private IEnumerator MoveTo(Transform who, Vector3 targetPos, float speed)
         {
@@ -40,7 +39,6 @@ namespace Actions
                     yield return DoItem(actor, decision.Item, targets);
                     break;
                 case UI.CommandDecision.DecisionType.Guard:
-                    // (guard behavior unchanged)
                     yield break;
             }
         }
@@ -67,7 +65,6 @@ namespace Actions
             var t = targets[0];
             if (!t) yield break;
 
-            // Cache transform to restore after the action
             Vector3 startPos = actor.transform.position;
             Quaternion startRot = actor.transform.rotation;
 
@@ -77,37 +74,37 @@ namespace Actions
             if (look.sqrMagnitude > 0.0001f)
                 actor.transform.rotation = Quaternion.LookRotation(look);
 
-            // Optional pre-anim + approach
             var anim = actor.GetComponent<AnimDriver>();
-            if (anim) anim.Fire(AnimDriver.AnimEvent.Approach);
+            bool isMelee = actor.basicAttackMove == SkillDefinition.MoveStyle.Melee;
 
-            Vector3 toTarget = (t.transform.position - actor.transform.position);
-            toTarget.y = 0f;
-            Vector3 approachPos = t.transform.position - toTarget.normalized * Mathf.Max(0.05f, approachDistance);
-            approachPos.y = startPos.y;
-            yield return MoveTo(actor.transform, approachPos, moveSpeed);
+            if (isMelee)
+            {
+                if (anim) anim.Fire(AnimDriver.AnimEvent.Approach);
+                Vector3 toTarget = (t.transform.position - actor.transform.position);
+                toTarget.y = 0f;
+                Vector3 approachPos = t.transform.position - toTarget.normalized * Mathf.Max(0.05f, meleeDistance);
+                approachPos.y = startPos.y;
+                yield return MoveTo(actor.transform, approachPos, moveSpeed);
+            }
 
-            // Play attack + windup
             actor.PlayAttack();
             if (anim) anim.Fire(AnimDriver.AnimEvent.Attack);
             yield return new WaitForSeconds(actor.attackWindup);
 
-            // Damage application
             int dmg = DamageCalculator.Physical(null, actor, t);
             t.SetHP(t.currentHP - dmg);
 
             if (damagePopup) damagePopup.Spawn(t.transform.position, dmg, false, false);
             if (t.currentHP > 0) t.PlayHurt();
 
-            // Recover
             yield return new WaitForSeconds(actor.attackRecover);
             actor.PlayIdle();
 
-            // Return & restore
-            yield return MoveTo(actor.transform, startPos, moveSpeed);
+            if (isMelee)
+                yield return MoveTo(actor.transform, startPos, moveSpeed);
+
             actor.transform.rotation = startRot;
 
-            // SP on basic
             actor.GainSP(1);
         }
 
@@ -115,45 +112,43 @@ namespace Actions
         {
             if (!skill) yield break;
 
-            // Enforce targets if needed (if not self-only and none supplied, bail)
             if (skill.targetSelection != SkillDefinition.TargetSelection.SelfOnly && (targets == null || targets.Count == 0))
                 yield break;
 
-            // SP gate
             if (actor.currentSP < skill.spCost) yield break;
             actor.SetSP(actor.currentSP - skill.spCost);
 
-            // Cache for restore
             Vector3 startPos = actor.transform.position;
             Quaternion startRot = actor.transform.rotation;
 
-            // Choose focal (first valid) target when not SelfOnly (for facing/approach)
             CharacterScript focal = null;
             if (skill.targetSelection != SkillDefinition.TargetSelection.SelfOnly && targets != null)
             {
                 foreach (var z in targets) { if (z) { focal = z; break; } }
             }
 
-            // Face + approach depending on MoveStyle
+            bool shouldRotate = (skill.targetSelection == SkillDefinition.TargetSelection.Single); // Prevents rotating if Single Target
+            
+            Vector3 to = Vector3.zero;
+
             if (focal)
             {
-                Vector3 to = focal.transform.position - actor.transform.position;
+                to = focal.transform.position - actor.transform.position;
                 to.y = 0f;
-                if (to.sqrMagnitude > 0.0001f)
+                if (shouldRotate && to.sqrMagnitude > 0.0001f)
                     actor.transform.rotation = Quaternion.LookRotation(to);
 
-                if (skill.moveStyle == SkillDefinition.MoveStyle.Approach)
+                if (skill.moveStyle == SkillDefinition.MoveStyle.Melee)
                 {
                     var animDrv = actor.GetComponent<AnimDriver>();
                     if (animDrv) animDrv.Fire(AnimDriver.AnimEvent.Approach);
 
-                    Vector3 approachPos = focal.transform.position - to.normalized * Mathf.Max(0.05f, approachDistance);
+                    Vector3 approachPos = focal.transform.position - to.normalized * Mathf.Max(0.05f, meleeDistance);
                     approachPos.y = startPos.y;
                     yield return MoveTo(actor.transform, approachPos, moveSpeed);
                 }
             }
 
-            // Animation trigger override or default attack
             {
                 var animDrv = actor.GetComponent<AnimDriver>();
                 bool usedOverride = false;
@@ -175,18 +170,15 @@ namespace Actions
                 }
             }
 
-            // Windup
             yield return new WaitForSeconds(actor.attackWindup);
 
             // ===== EFFECT RESOLUTION =====
-            // 1) Damage / Heal based on EffectType + PotencyMode
             if (skill.effectType == SkillDefinition.EffectType.Damage)
             {
                 foreach (var t in targets)
                 {
                     if (!t) continue;
-                    bool useFlat = (skill.potencyMode == SkillDefinition.PotencyMode.FlatNumber);
-                    int dmg = Actions.DamageCalculator.Physical(skill, actor, t, skill.power, useFlat);
+                    int dmg = DamageCalculator.SkillDamage(skill, actor, t);
                     t.SetHP(t.currentHP - dmg);
                     if (damagePopup) damagePopup.Spawn(t.transform.position, dmg, false, false);
                     if (t.currentHP > 0) t.PlayHurt();
@@ -201,16 +193,14 @@ namespace Actions
                 foreach (var t in list)
                 {
                     if (!t) continue;
-                    bool isPercent = (skill.potencyMode == SkillDefinition.PotencyMode.Percent);
-                    int heal = Actions.DamageCalculator.HealAmount(t.maxHP, skill.power, isPercent);
+                    int heal = DamageCalculator.SkillHeal(skill, actor, t);
                     t.SetHP(t.currentHP + heal);
                     if (damagePopup) damagePopup.Spawn(t.transform.position, heal, false, true);
                 }
             }
-            // EffectType.None: intentionally no direct HP change
 
-            // 2) Apply / Remove statuses
             if (skill.statuses != null && skill.statuses.Count > 0)
+
             {
                 var list = targets;
                 if ((list == null || list.Count == 0) && skill.targetSelection == SkillDefinition.TargetSelection.SelfOnly)
@@ -232,12 +222,10 @@ namespace Actions
                 }
             }
 
-            // Recover
             yield return new WaitForSeconds(actor.attackRecover);
             actor.PlayIdle();
 
-            // Return & restore (only moved if we approached)
-            if (skill.moveStyle == SkillDefinition.MoveStyle.Approach)
+            if (skill.moveStyle == SkillDefinition.MoveStyle.Melee)
                 yield return MoveTo(actor.transform, startPos, moveSpeed);
 
             actor.transform.rotation = startRot;
@@ -247,7 +235,6 @@ namespace Actions
         {
             if (!item) yield break;
 
-            // consume 1 if ItemsInventory exists
             var inv = actor.GetComponent<ItemsInventory>();
             if (inv && !inv.TryConsume(item, 1)) yield break;
 
@@ -256,8 +243,7 @@ namespace Actions
                 foreach (var t in targets)
                 {
                     if (!t) continue;
-                    bool isPercent = (item.potencyMode == Data.ItemDefinition.PotencyMode.Percent);
-                    int heal = Actions.DamageCalculator.HealAmount(t.maxHP, item.power, isPercent);
+                    int heal = DamageCalculator.ItemHeal(item, actor, t);
                     t.SetHP(t.currentHP + heal);
                     damagePopup?.Spawn(t.transform.position, heal, false, true);
                 }
@@ -283,8 +269,6 @@ namespace Actions
             yield return null;
         }
 
-        // ===== Helpers =====
-
         private static string GetAnimTriggerName(SkillDefinition.AnimTrigger trig)
         {
             switch (trig)
@@ -298,20 +282,17 @@ namespace Actions
                 case SkillDefinition.AnimTrigger.Spellcast_Healing: return "Spellcast - Healing";
                 case SkillDefinition.AnimTrigger.Items: return "Items";
                 case SkillDefinition.AnimTrigger.Block: return "Block";
-                default: return null; // Default → let legacy calls run
+                default: return null;
             }
         }
 
-        // Tries common remove APIs without forcing you to implement a new method.
         private static System.Reflection.MethodInfo _cachedRemove;
         private static bool TryRemoveStatus(CharacterScript target, StatusEffectDefinition def)
         {
             if (!target || !def) return false;
 
-            // Cache a remove method if available:
             if (_cachedRemove == null)
             {
-                // Try common names
                 var ty = target.GetType();
                 _cachedRemove = ty.GetMethod("RemoveStatusEffect", new[] { typeof(StatusEffectDefinition) })
                                 ?? ty.GetMethod("RemoveStatus", new[] { typeof(StatusEffectDefinition) })
@@ -324,7 +305,6 @@ namespace Actions
                 return true;
             }
 
-            // No remove method found—silently skip (non-breaking)
             return false;
         }
     }
