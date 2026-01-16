@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,10 +10,7 @@ namespace UI
 
         [Header("Visuals")]
         [SerializeField] private Sprite fallbackSprite;
-        [SerializeField] private bool showActiveFirst = true;
-
-        [Header("Active Visual")]
-        [SerializeField] private float activeImageScale = 1.15f;
+        [SerializeField] private float activeImageScale = 1.25f;
 
         [Header("Fallback Colors (if no portrait)")]
         [SerializeField] private Color playerColor = new Color(0.2f, 0.6f, 1f);
@@ -48,31 +44,12 @@ namespace UI
 
             foreach (Transform c in container.transform) Destroy(c.gameObject);
 
-            var list = new List<CharacterScript>();
+            if (_turn == null || _turn.Forecast == null) return;
 
-            if (_turn != null && _turn.Forecast != null)
-                list.AddRange(_turn.Forecast);
+            var activeUnit = _active != null ? _active : _turn.Current;
 
-            // Ensure active is represented in the bar
-            if (_active != null)
-            {
-                int idx = list.IndexOf(_active);
-                if (idx < 0)
-                {
-                    // active not in forecast => inject it
-                    if (showActiveFirst) list.Insert(0, _active);
-                    else list.Add(_active);
-                }
-                else if (showActiveFirst && idx != 0)
-                {
-                    // move active to front if desired
-                    list.RemoveAt(idx);
-                    list.Insert(0, _active);
-                }
-            }
-
-            foreach (var u in list)
-                CreateIcon(u, u == _active);
+            foreach (var u in _turn.Forecast)
+                CreateIcon(u, u == activeUnit);
         }
 
         private void CreateIcon(CharacterScript unit, bool isActive)

@@ -8,7 +8,10 @@ public class TurnOrderController : MonoBehaviour
     private readonly Queue<CharacterScript> _queue = new();
     private readonly List<CharacterScript> _forecast = new();
 
+    private CharacterScript _current; // NEW: current active unit (popped)
+
     public IReadOnlyList<CharacterScript> Forecast => _forecast;
+    public CharacterScript Current => _current; // optional access if you want it
 
     public event Action ForecastChanged;
 
@@ -16,6 +19,7 @@ public class TurnOrderController : MonoBehaviour
     {
         _queue.Clear();
         _forecast.Clear();
+        _current = null;
 
         var all = new List<CharacterScript>();
         all.AddRange(spawns.Players);
@@ -29,21 +33,23 @@ public class TurnOrderController : MonoBehaviour
     public CharacterScript PopNext()
     {
         if (_queue.Count == 0) return null;
-        var u = _queue.Dequeue();
+        _current = _queue.Dequeue();
         RebuildForecast();
-        return u;
+        return _current;
     }
 
     public void Requeue(CharacterScript unit)
     {
         if (!unit) return;
         _queue.Enqueue(unit);
+        if (_current == unit) _current = null;
         RebuildForecast();
     }
 
     private void RebuildForecast()
     {
         _forecast.Clear();
+        if (_current != null) _forecast.Add(_current);
         _forecast.AddRange(_queue);
         ForecastChanged?.Invoke();
     }
