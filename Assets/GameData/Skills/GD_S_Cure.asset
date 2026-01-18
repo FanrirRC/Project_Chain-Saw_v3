@@ -23,5 +23,5 @@ MonoBehaviour:
   power: 20
   potencyMode: 0
   statuses: []
-  moveStyle: 0
-  animTrigger: 0
+  moveStyle: 1
+  animTrigger: 7

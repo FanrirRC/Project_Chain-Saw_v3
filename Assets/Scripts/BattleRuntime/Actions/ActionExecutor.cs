@@ -121,6 +121,16 @@ namespace Actions
             Vector3 startPos = actor.transform.position;
             Quaternion startRot = actor.transform.rotation;
 
+            var animDrv = actor.GetComponent<AnimDriver>();
+            // --- NEW: If Ranged, lock position by disabling root motion during the cast ---
+            bool lockPosition = (skill.moveStyle == SkillDefinition.MoveStyle.Ranged);
+            bool oldRootMotion = false;
+            if (lockPosition && animDrv && animDrv.animator)
+            {
+                oldRootMotion = animDrv.animator.applyRootMotion;
+                animDrv.animator.applyRootMotion = false;
+            }
+
             CharacterScript focal = null;
             if (skill.targetSelection != SkillDefinition.TargetSelection.SelfOnly && targets != null)
             {
@@ -140,7 +150,6 @@ namespace Actions
 
                 if (skill.moveStyle == SkillDefinition.MoveStyle.Melee)
                 {
-                    var animDrv = actor.GetComponent<AnimDriver>();
                     if (animDrv) animDrv.Fire(AnimDriver.AnimEvent.Melee);
 
                     Vector3 meleePos = focal.transform.position - to.normalized * Mathf.Max(0.05f, meleeDistance);
@@ -150,7 +159,6 @@ namespace Actions
             }
 
             {
-                var animDrv = actor.GetComponent<AnimDriver>();
                 bool usedOverride = false;
 
                 if (skill.animTrigger != SkillDefinition.AnimTrigger.Default && animDrv && animDrv.animator)
@@ -171,6 +179,9 @@ namespace Actions
             }
 
             yield return new WaitForSeconds(actor.attackWindup);
+
+            if (lockPosition) actor.transform.position = startPos;
+
 
             // ===== EFFECT RESOLUTION =====
             if (skill.effectType == SkillDefinition.EffectType.Damage)
@@ -228,7 +239,13 @@ namespace Actions
             if (skill.moveStyle == SkillDefinition.MoveStyle.Melee)
                 yield return MoveTo(actor.transform, startPos, moveSpeed);
 
+            if (lockPosition) actor.transform.position = startPos;
+
             actor.transform.rotation = startRot;
+
+            if (lockPosition && animDrv && animDrv.animator)
+                animDrv.animator.applyRootMotion = oldRootMotion;
+
         }
 
         private IEnumerator DoItem(CharacterScript actor, Data.ItemDefinition item, List<CharacterScript> targets)
@@ -300,7 +317,7 @@ namespace Actions
             }
 
             if (_cachedRemove != null)
-            {
+            { 
                 _cachedRemove.Invoke(target, new object[] { def });
                 return true;
             }

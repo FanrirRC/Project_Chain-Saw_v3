@@ -22,6 +22,8 @@ MonoBehaviour:
   potencyStat: 1
   power: 10
   potencyMode: 0
-  statuses: []
-  moveStyle: 0
-  animTrigger: 0
+  statuses:
+  - status: {fileID: 11400000, guid: 402de3c90c27c854cb883595534fc89d, type: 2}
+    op: 0
+  moveStyle: 1
+  animTrigger: 6
