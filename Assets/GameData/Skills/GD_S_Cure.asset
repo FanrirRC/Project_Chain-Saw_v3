@@ -22,8 +22,6 @@ MonoBehaviour:
   potencyStat: 1
   power: 20
   potencyMode: 0
-  statuses:
-  - status: {fileID: 0}
-    op: 0
+  statuses: []
   moveStyle: 0
   animTrigger: 0
