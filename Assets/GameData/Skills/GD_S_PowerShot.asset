@@ -20,8 +20,8 @@ MonoBehaviour:
   targetFaction: 2
   effectType: 0
   potencyStat: 1
-  power: 5
-  potencyMode: 0
+  power: 150
+  potencyMode: 1
   statuses: []
   moveStyle: 1
   animTrigger: 4
