@@ -14,11 +14,12 @@ namespace Data
         [System.Serializable]
         public class StatusEntry
         {
-            [HorizontalGroup("Row")]
-            [HideLabel] public StatusEffectDefinition status;
+            [TableColumnWidth(125)]
+            [LabelText("Status")]
+            public StatusEffectDefinition status;
 
-            [HorizontalGroup("Row")]
-            [LabelText("Op")] public StatusOp op = StatusOp.Inflict;
+            [LabelText("Utilization")]
+            public StatusOp op = StatusOp.Inflict;
         }
 
         [BoxGroup("Item_Details", centerLabel: true)]

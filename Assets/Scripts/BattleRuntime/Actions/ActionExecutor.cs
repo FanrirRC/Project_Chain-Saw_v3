@@ -79,12 +79,12 @@ namespace Actions
 
             if (isMelee)
             {
-                if (anim) anim.Fire(AnimDriver.AnimEvent.Approach);
+                if (anim) anim.Fire(AnimDriver.AnimEvent.Melee);
                 Vector3 toTarget = (t.transform.position - actor.transform.position);
                 toTarget.y = 0f;
-                Vector3 approachPos = t.transform.position - toTarget.normalized * Mathf.Max(0.05f, meleeDistance);
-                approachPos.y = startPos.y;
-                yield return MoveTo(actor.transform, approachPos, moveSpeed);
+                Vector3 meleePos = t.transform.position - toTarget.normalized * Mathf.Max(0.05f, meleeDistance);
+                meleePos.y = startPos.y;
+                yield return MoveTo(actor.transform, meleePos, moveSpeed);
             }
 
             actor.PlayAttack();
@@ -127,7 +127,7 @@ namespace Actions
                 foreach (var z in targets) { if (z) { focal = z; break; } }
             }
 
-            bool shouldRotate = (skill.targetSelection == SkillDefinition.TargetSelection.Single); // Prevents rotating if Single Target
+            bool shouldRotate = (skill.targetSelection == SkillDefinition.TargetSelection.Single);
             
             Vector3 to = Vector3.zero;
 
@@ -141,11 +141,11 @@ namespace Actions
                 if (skill.moveStyle == SkillDefinition.MoveStyle.Melee)
                 {
                     var animDrv = actor.GetComponent<AnimDriver>();
-                    if (animDrv) animDrv.Fire(AnimDriver.AnimEvent.Approach);
+                    if (animDrv) animDrv.Fire(AnimDriver.AnimEvent.Melee);
 
-                    Vector3 approachPos = focal.transform.position - to.normalized * Mathf.Max(0.05f, meleeDistance);
-                    approachPos.y = startPos.y;
-                    yield return MoveTo(actor.transform, approachPos, moveSpeed);
+                    Vector3 meleePos = focal.transform.position - to.normalized * Mathf.Max(0.05f, meleeDistance);
+                    meleePos.y = startPos.y;
+                    yield return MoveTo(actor.transform, meleePos, moveSpeed);
                 }
             }
 

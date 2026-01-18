@@ -23,7 +23,7 @@ MonoBehaviour:
   power: 10
   potencyMode: 0
   statuses:
-  - status: {fileID: 11400000, guid: 402de3c90c27c854cb883595534fc89d, type: 2}
+  - status: {fileID: 0}
     op: 0
-  moveStyle: 0
+  moveStyle: 1
   animTrigger: 0

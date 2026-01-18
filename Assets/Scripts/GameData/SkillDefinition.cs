@@ -18,12 +18,11 @@ namespace Data
         [Serializable]
         public class StatusEntry
         {
-            [HorizontalGroup("Row", Width = 220)]
-            [LabelWidth(90)]
+            [TableColumnWidth(125)]
+            [LabelText("Status")]
             public StatusEffectDefinition status;
 
-            [HorizontalGroup("Row")]
-            [LabelText("Op")]
+            [LabelText("Utilization")]
             public StatusOp op = StatusOp.Inflict;
         }
 
@@ -113,7 +112,6 @@ namespace Data
 
         // ---- Animation override (shared trigger names) ----
         [BoxGroup("Animation", centerLabel: true)]
-        // Two side-by-side columns under Animation:
         [HorizontalGroup("Animation/Split", Width = 0.5f)]
         [VerticalGroup("Animation/Split/Left")]
         [LabelText("Movement")]

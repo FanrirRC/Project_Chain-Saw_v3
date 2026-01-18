@@ -19,4 +19,6 @@ MonoBehaviour:
   potencyStat: 3
   power: 10
   potencyMode: 0
-  statuses: []
+  statuses:
+  - status: {fileID: 0}
+    op: 0

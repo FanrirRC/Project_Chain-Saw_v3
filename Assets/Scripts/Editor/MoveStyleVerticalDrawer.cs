@@ -20,12 +20,12 @@ namespace EditorTools
 
             // Vertical stack of "toggle buttons"
             EditorGUILayout.BeginVertical();
-            bool isApproach = value == Data.SkillDefinition.MoveStyle.Melee;
-            bool isStand = value == Data.SkillDefinition.MoveStyle.Ranged;
+            bool isMelee = value == Data.SkillDefinition.MoveStyle.Melee;
+            bool isRanged = value == Data.SkillDefinition.MoveStyle.Ranged;
 
-            if (GUILayout.Toggle(isApproach, "Approach", "Button"))
+            if (GUILayout.Toggle(isMelee, "Melee", "Button"))
                 value = Data.SkillDefinition.MoveStyle.Melee;
-            if (GUILayout.Toggle(isStand, "Stand", "Button"))
+            if (GUILayout.Toggle(isRanged, "Ranged", "Button"))
                 value = Data.SkillDefinition.MoveStyle.Ranged;
 
             EditorGUILayout.EndVertical();

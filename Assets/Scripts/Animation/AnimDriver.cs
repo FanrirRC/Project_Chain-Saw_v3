@@ -8,7 +8,7 @@ public class AnimDriver : MonoBehaviour
     {
         Idle,
         StartTurn,
-        Approach,
+        Melee,
         Attack,
         SkillCast,
         Hurt,
