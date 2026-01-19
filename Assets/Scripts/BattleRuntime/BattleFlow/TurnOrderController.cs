@@ -8,10 +8,10 @@ public class TurnOrderController : MonoBehaviour
     private readonly Queue<CharacterScript> _queue = new();
     private readonly List<CharacterScript> _forecast = new();
 
-    private CharacterScript _current; // NEW: current active unit (popped)
+    private CharacterScript _current;
 
     public IReadOnlyList<CharacterScript> Forecast => _forecast;
-    public CharacterScript Current => _current; // optional access if you want it
+    public CharacterScript Current => _current;
 
     public event Action ForecastChanged;
 

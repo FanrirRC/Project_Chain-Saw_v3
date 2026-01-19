@@ -8,6 +8,7 @@ public class SkillSlotUI : MonoBehaviour
     [SerializeField] private Image iconImage;
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private TMP_Text costText;
+    [SerializeField] private TMP_Text descriptionText;
     [SerializeField] private Button button;
 
     private Data.SkillDefinition _skill;
@@ -23,6 +24,7 @@ public class SkillSlotUI : MonoBehaviour
         if (iconImage) iconImage.sprite = skill.icon;
         if (nameText) nameText.text = skill.displayName;
         if (costText) costText.text = skill.spCost > 0 ? $"SP {skill.spCost}" : "Free";
+        if (descriptionText) descriptionText.text = skill.description ?? "";
 
         bool canAfford = owner.currentSP >= skill.spCost;
         if (button)

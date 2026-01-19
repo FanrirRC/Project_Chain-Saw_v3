@@ -27,9 +27,9 @@ namespace UI
         [SerializeField] private ActionListPanel actionPanel;
 
         [Header("Keyboard Navigation")]
-        [SerializeField] private Transform buttonsRoot;             // parent with Attack/Skills/Items/Guard/Cancel buttons
+        [SerializeField] private Transform buttonsRoot;
         [SerializeField] private bool allowKeyboard = true;
-        [SerializeField] private GameObject selectionCursorPrefab;  // prefab of a small Image/arrow
+        [SerializeField] private GameObject selectionCursorPrefab;
         [SerializeField] private Vector2 cursorOffset = new Vector2(-15f, -5f);
 
         public CommandDecision lastDecision { get; private set; }
@@ -38,13 +38,12 @@ namespace UI
         private CharacterScript _currentActor;
         private readonly List<Button> _buttons = new();
         private int _idx = 0;
-        private RectTransform _cursorInstance; // instantiated once
-        private Canvas _canvas;                // for proper UI coordinate conversion
+        private RectTransform _cursorInstance;
+        private Canvas _canvas;
 
         private enum SubmenuRequest { None, Skills, Items }
         private SubmenuRequest _submenu = SubmenuRequest.None;
 
-        // -------- Button hooks (wire these from your UI Buttons) --------
         public void ChooseAttack() => lastDecision = new CommandDecision
         {
             Type = CommandDecision.DecisionType.Attack,
@@ -59,7 +58,6 @@ namespace UI
         };
         public void CancelMenu() => WasCancelled = true;
 
-        // These **request** opening a submenu; the main loop will actually open it and pause input
         public void OpenSkills() { _submenu = SubmenuRequest.Skills; }
         public void OpenItems() { _submenu = SubmenuRequest.Items; }
 
@@ -87,7 +85,6 @@ namespace UI
             };
         }
 
-        // -------- Lifecycle --------
         public IEnumerator OpenFor(CharacterScript actor)
         {
             _currentActor = actor;
@@ -106,15 +103,13 @@ namespace UI
             {
                 BuildButtonsList();
                 EnsureCursor();
-                SelectCurrent(); // place cursor on current button
+                SelectCurrent();
             }
 
             while (lastDecision.Type == CommandDecision.DecisionType.None && !WasCancelled)
             {
-                // If a submenu was requested, open it synchronously and pause this loop's input
                 if (_submenu != SubmenuRequest.None && actionPanel != null)
                 {
-                    // hide command cursor while submenu is active
                     if (_cursorInstance) _cursorInstance.gameObject.SetActive(false);
 
                     if (_submenu == SubmenuRequest.Skills)
@@ -130,7 +125,6 @@ namespace UI
                             ChooseItem(actionPanel.LastPickedItem, allies: true, all: false);
                     }
 
-                    // submenu handled; clear request and restore command cursor
                     _submenu = SubmenuRequest.None;
                     if (_cursorInstance) _cursorInstance.gameObject.SetActive(true);
                     SelectCurrent();
@@ -138,12 +132,10 @@ namespace UI
                     if (lastDecision.Type != CommandDecision.DecisionType.None || WasCancelled)
                         break;
 
-                    // continue next frame to avoid eating the Enter/Esc that closed submenu
                     yield return null;
                     continue;
                 }
 
-                // Command menu input (only when no submenu is open)
                 if (allowKeyboard && _buttons.Count > 0)
                 {
                     if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -158,7 +150,7 @@ namespace UI
                     }
                     if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
                     {
-                        _buttons[_idx].onClick?.Invoke(); // invoke selected button
+                        _buttons[_idx].onClick?.Invoke();
                     }
                 }
 
@@ -170,7 +162,6 @@ namespace UI
             gameObject.SetActive(false);
         }
 
-        // -------- Helpers --------
         private void BuildButtonsList()
         {
             _buttons.Clear();
@@ -187,7 +178,6 @@ namespace UI
         {
             if (selectionCursorPrefab && _cursorInstance == null)
             {
-                // parent beside the menu (same canvas)
                 var go = Instantiate(selectionCursorPrefab, transform.parent);
                 _cursorInstance = go.GetComponent<RectTransform>();
             }
@@ -209,13 +199,10 @@ namespace UI
 
                 if (btnRT && canvasRT)
                 {
-                    // --- LEFT EDGE (Y centered) ---
-                    // world corners: 0=bottom-left, 1=top-left, 2=top-right, 3=bottom-right
                     var corners = new Vector3[4];
                     btnRT.GetWorldCorners(corners);
                     var leftEdgeMidWorld = (corners[0] + corners[1]) * 0.5f;
 
-                    // convert to canvas local space
                     Vector2 screen = RectTransformUtility.WorldToScreenPoint(
                         _canvas ? _canvas.worldCamera : null, leftEdgeMidWorld);
                     RectTransformUtility.ScreenPointToLocalPointInRectangle(
@@ -226,7 +213,6 @@ namespace UI
                 }
                 else
                 {
-                    // fallback
                     _cursorInstance.position = btnRT.position + (Vector3)cursorOffset;
                 }
             }

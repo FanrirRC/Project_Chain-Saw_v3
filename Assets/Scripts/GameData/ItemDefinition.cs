@@ -8,7 +8,7 @@ namespace Data
     public class ItemDefinition : ScriptableObject
     {
         public enum EffectType { Heal, ApplyStatus }
-        public enum PotencyMode { FlatNumber, Percent } // shown as "Potency Type"
+        public enum PotencyMode { FlatNumber, Percent }
         public enum StatusOp { Inflict, Remove }
 
         [System.Serializable]

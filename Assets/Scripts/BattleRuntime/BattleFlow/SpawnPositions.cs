@@ -3,28 +3,26 @@ using UnityEngine;
 
 public class SpawnPositions : MonoBehaviour
 {
-    // Players positions
     private static readonly Vector3[] P1 = { new Vector3(0f, 0.25f, -5f) };
     private static readonly Vector3[] P2 = {
-        new Vector3(-1.25f, 0.25f, -5f),
-        new Vector3( 1.25f, 0.25f, -5f)
+        new Vector3(-1.25f, 0, -5f),
+        new Vector3( 1.25f, 0, -5f)
     };
     private static readonly Vector3[] P3 = {
-        new Vector3( 0f,    0.25f, -5f),
-        new Vector3( 2.5f,  0.25f, -5f),
-        new Vector3(-2.5f,  0.25f, -5f)
+        new Vector3( 0f,    0, -5f),
+        new Vector3( 2.5f,  0, -5f),
+        new Vector3(-2.5f,  0, -5f)
     };
 
-    // Enemies positions
     private static readonly Vector3[] E1 = { new Vector3(0f, 0.25f, 2.5f) };
     private static readonly Vector3[] E2 = {
-        new Vector3(-1.5625f, 0.25f, 2.5f),
-        new Vector3( 1.5625f, 0.25f, 2.5f)
+        new Vector3(-1.5625f, 0, 2.5f),
+        new Vector3( 1.5625f, 0, 2.5f)
     };
     private static readonly Vector3[] E3 = {
-        new Vector3( 0f,     0.25f, 2.5f),
-        new Vector3( 3.125f, 0.25f, 3.75f),
-        new Vector3(-3.125f, 0.25f, 3.75f)
+        new Vector3( 0f,     0, 2.5f),
+        new Vector3( 3.125f, 0, 3.75f),
+        new Vector3(-3.125f, 0, 3.75f)
     };
 
     private readonly List<CharacterScript> _players = new();
@@ -60,7 +58,6 @@ public class SpawnPositions : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            // Players: normal rotation, Enemies: rotated 180° on Y-axis
             Quaternion rot = isPlayerSide ? Quaternion.identity : Quaternion.Euler(0f, 180f, 0f);
 
             var go = Instantiate(prefabs[i], spots[i], rot, transform);

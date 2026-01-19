@@ -6,8 +6,7 @@ namespace UI
     public class SPStripUI : MonoBehaviour
     {
         [Header("Slots container")]
-        [SerializeField] private Transform container;  // parent with 9 slot children (defaults to this)
-
+        [SerializeField] private Transform container;
         [Header("Child names inside each slot")]
         [SerializeField] private string emptyChildName = "SP_Empty";
         [SerializeField] private string fullChildName = "SP_Full";
@@ -28,7 +27,6 @@ namespace UI
 
         private readonly List<Slot> slots = new(9);
 
-        /// <summary>Bind to a unit; call from BattleHUD when assigning the row.</summary>
         public void Bind(CharacterScript unit)
         {
             Unsubscribe();
@@ -41,7 +39,7 @@ namespace UI
             if (bound != null)
             {
                 bound.OnSPChanged += OnSPChanged;
-                bound.OnHPChanged += OnSPChanged; // refresh on KO
+                bound.OnHPChanged += OnSPChanged;
             }
         }
 
@@ -68,23 +66,18 @@ namespace UI
                 var slotRootT = container.GetChild(i);
                 if (!slotRootT) continue;
 
-                // Find SP_Empty (direct)
                 Transform emptyT = null;
                 if (!string.IsNullOrEmpty(emptyChildName))
                     emptyT = slotRootT.Find(emptyChildName);
 
-                // Find SP_Full (try direct, then nested under empty, then deep scan)
                 Transform fullT = null;
                 if (!string.IsNullOrEmpty(fullChildName))
                 {
-                    // direct
                     fullT = slotRootT.Find(fullChildName);
 
-                    // nested under empty
                     if (!fullT && emptyT)
                         fullT = emptyT.Find(fullChildName);
 
-                    // deep scan (inactive too)
                     if (!fullT)
                     {
                         foreach (var t in slotRootT.GetComponentsInChildren<Transform>(true))
@@ -121,13 +114,10 @@ namespace UI
 
                 if (s.root) s.root.SetActive(withinMax);
 
-                // Empty orbs ALWAYS visible within max
                 if (s.empty) s.empty.SetActive(withinMax);
 
-                // Full star visible for leftmost 'cur' only
                 if (s.full) s.full.SetActive(withinMax && i < cur);
 
-                // Helpful warning once per slot if something’s missing
                 if (withinMax && !s.warned && (!s.empty || !s.full))
                 {
                     s.warned = true;
@@ -139,7 +129,7 @@ namespace UI
                     );
                 }
 
-                slots[i] = s; // write back 'warned'
+                slots[i] = s;
             }
         }
     }

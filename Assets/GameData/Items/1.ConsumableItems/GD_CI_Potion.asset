@@ -17,6 +17,6 @@ MonoBehaviour:
   description: 
   effectType: 0
   potencyStat: 3
-  power: 10
-  potencyMode: 0
+  power: 25
+  potencyMode: 1
   statuses: []

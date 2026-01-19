@@ -141,7 +141,7 @@ MonoBehaviour:
   unitType: 0
   characterName: Chainsaw
   characterModel: {fileID: 3766415100802248825}
-  portrait: {fileID: 21300000, guid: 98f95ba68b2c3d24cba927383cda95c9, type: 3}
+  portrait: {fileID: 21300000, guid: c61ef85ea9b2abc4fa5754ffff7c047f, type: 3}
   characterStats: {fileID: 11400000, guid: 3b0674c42c35f3d44be28db9f1e86a6a, type: 2}
   enemyStats: {fileID: 0}
   maxHP: 0
@@ -184,7 +184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8213441283005478da6abee34b047d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemsInventory
-  items: []
+  items:
+  - item: {fileID: 11400000, guid: 7908243896a8cbf469742971c5f02fce, type: 2}
+    count: 1
 --- !u!95 &1178155758417492558
 Animator:
   serializedVersion: 7

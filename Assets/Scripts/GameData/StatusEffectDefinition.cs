@@ -4,13 +4,12 @@ using UnityEngine;
 namespace Data
 {
     public enum StatusCategory { Ailment, Buff, Debuff }
-    public enum StatType { None, ATK, DEF, MaxHP, MaxSP }      // used by CharacterScript (namespace-level)
-    public enum PotencyMode { FlatNumber, Percent }            // used by CharacterScript (namespace-level)
+    public enum StatType { None, ATK, DEF, MaxHP, MaxSP }
+    public enum PotencyMode { FlatNumber, Percent }
 
     [CreateAssetMenu(menuName = "RPG/Status Effect")]
     public class StatusEffectDefinition : ScriptableObject
     {
-        // === Effect Details (mirrors Skill_Details: Icon row + two columns) ===
         [BoxGroup("Effect_Details", centerLabel: true)]
         [HorizontalGroup("Effect_Details/Split", Width = 80), HideLabel, PreviewField(80)]
         public Sprite icon;
@@ -31,10 +30,8 @@ namespace Data
         [LabelText("Effect Type")]
         [EnumToggleButtons] public StatusCategory category = StatusCategory.Ailment;
 
-        // === Two columns: Stat Modifier | DOT ===
         [HorizontalGroup("ModsAndDot")]
 
-        // ---- Stat Modifier (left column) ----
         [VerticalGroup("ModsAndDot/Left")]
         [BoxGroup("ModsAndDot/Left/Stat Modifier", centerLabel: true)]
         [HorizontalGroup("ModsAndDot/Left/Stat Modifier/Split")]
@@ -48,14 +45,12 @@ namespace Data
         [EnumToggleButtons, LabelText("Potency Type")]
         public PotencyMode potencyMode = PotencyMode.FlatNumber;
 
-        // ---- DOT (right column) ----
         [VerticalGroup("ModsAndDot/Right")]
         [BoxGroup("ModsAndDot/Right/DOT", centerLabel: true)]
         [LabelText("DOT Active?")] public bool dotActive = false;
 
         public enum DOTSourceOwner { Inflictor, Target }
 
-        // Row 1 (left column within DOT): Source Owner + Base Stat
         [ShowIf("dotActive")]
         [HorizontalGroup("ModsAndDot/Right/DOT/Row1")]
         [VerticalGroup("ModsAndDot/Right/DOT/Row1/Left")]
@@ -67,7 +62,6 @@ namespace Data
         [LabelText("Base Stat")]
         public StatType dotBaseStat = StatType.ATK;
 
-        // Row 2 (right column within DOT): DOT Power + Potency Type
         [ShowIf("dotActive")]
         [HorizontalGroup("ModsAndDot/Right/DOT/Row2")]
         [VerticalGroup("ModsAndDot/Right/DOT/Row2/Right")]

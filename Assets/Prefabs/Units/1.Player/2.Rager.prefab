@@ -94,7 +94,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8213441283005478da6abee34b047d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemsInventory
-  items: []
+  items:
+  - item: {fileID: 11400000, guid: 7908243896a8cbf469742971c5f02fce, type: 2}
+    count: 1
 --- !u!95 &7835405204537555335
 Animator:
   serializedVersion: 7

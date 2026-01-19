@@ -425,6 +425,7 @@ MonoBehaviour:
   iconImage: {fileID: 6270398117364183247}
   nameText: {fileID: 6047122860314916039}
   costText: {fileID: 433993750437547193}
+  descriptionText: {fileID: 7744221640272237679}
   button: {fileID: 3105397655188583892}
 --- !u!114 &3491429597947193616
 MonoBehaviour:

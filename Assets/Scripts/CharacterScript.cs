@@ -47,7 +47,7 @@ public class CharacterScript : MonoBehaviour
         public int remainingTurns;
         public CharacterScript inflictor;
 
-        public bool skipDecrementThisTurn; // if status effect is self-applied this turn, do not decrement duration this tick (only once)
+        public bool skipDecrementThisTurn;
     }
     public List<ActiveStatusEffect> activeStatusEffects = new();
 
@@ -57,10 +57,6 @@ public class CharacterScript : MonoBehaviour
 
     public bool IsEnemy => unitType == UnitType.Enemy;
 
-    // ------------------------------
-    // ANIMATION
-    // ------------------------------
-    [Header("Animation")]
     public Animator animator;
 
     public string idleState = "Idle";

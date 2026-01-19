@@ -15,7 +15,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   displayName: PowerShot
   spCost: 2
-  description: 
+  description: Damage enemy with 150% ATK
   targetSelection: 1
   targetFaction: 2
   effectType: 0

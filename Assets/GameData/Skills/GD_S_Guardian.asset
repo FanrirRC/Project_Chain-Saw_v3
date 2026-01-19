@@ -15,7 +15,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   displayName: Guardian
   spCost: 3
-  description: 
+  description: Raises DEF by 25%
   targetSelection: 2
   targetFaction: 1
   effectType: 2

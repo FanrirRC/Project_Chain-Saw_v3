@@ -260,7 +260,7 @@ public class GameDatabaseEditor : EditorWindow
             }
             SirenixEditorGUI.EndHorizontalToolbar();
 
-            if (_selectedAsset != null) // Renames the asset file
+            if (_selectedAsset != null)
             {
                 EditorGUILayout.Space(4);
                 EditorGUI.BeginChangeCheck();
@@ -300,7 +300,6 @@ public class GameDatabaseEditor : EditorWindow
         if (string.IsNullOrEmpty(path)) { _assetNameBuffer = _selectedAsset.name; return; }
         string folder = Path.GetDirectoryName(path)?.Replace("\\", "/");
         if (string.IsNullOrEmpty(folder)) { _assetNameBuffer = _selectedAsset.name; return; }
-        // Make unique if needed
         string uniquePath = AssetDatabase.GenerateUniqueAssetPath($"{folder}/{desiredName}.asset");
         string uniqueName = Path.GetFileNameWithoutExtension(uniquePath);
         string err = AssetDatabase.RenameAsset(path, uniqueName);
@@ -312,10 +311,8 @@ public class GameDatabaseEditor : EditorWindow
         }
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
-        // Re-sort list (so renamed assets stay ordered)
         var list = GetAssets(_selectedCategory);
         list.Sort((a, b) => string.Compare(a != null ? a.name : "", b != null ? b.name : "", StringComparison.OrdinalIgnoreCase));
-        // Keep buffer synced
         _assetNameBuffer = _selectedAsset.name;
         Repaint();
     }

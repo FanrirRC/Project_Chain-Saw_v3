@@ -15,13 +15,13 @@ MonoBehaviour:
   icon: {fileID: 0}
   displayName: Cure
   spCost: 3
-  description: 
+  description: Heals all allies by 25% Max HP
   targetSelection: 2
   targetFaction: 1
   effectType: 1
-  potencyStat: 1
-  power: 20
-  potencyMode: 0
+  potencyStat: 3
+  power: 25
+  potencyMode: 1
   statuses: []
   moveStyle: 1
   animTrigger: 7

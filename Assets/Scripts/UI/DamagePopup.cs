@@ -6,17 +6,17 @@ namespace UI
 {
     public class DamagePopup : MonoBehaviour
     {
-        [SerializeField] private GameObject popupPrefab; // must have TMP_Text
+        [SerializeField] private GameObject popupPrefab;
 
         [Header("Screen-space (recommended)")]
-        [SerializeField] private Canvas screenCanvas;               // main UI Canvas (non-WorldSpace)
+        [SerializeField] private Canvas screenCanvas;
         [SerializeField] private Vector2 screenOffset = new(0, 40f);
 
         [Header("World-space (if no canvas assigned)")]
         [SerializeField] private Vector3 worldOffset = new(0, 1.2f, 0);
 
         [Header("Anim")]
-        [SerializeField] private float riseDistance = 40f; // px (screen) or meters (world)
+        [SerializeField] private float riseDistance = 40f;
         [SerializeField] private float duration = 0.7f;
         [SerializeField] private AnimationCurve riseCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 

@@ -68,7 +68,6 @@ namespace Actions
             Vector3 startPos = actor.transform.position;
             Quaternion startRot = actor.transform.rotation;
 
-            // Face target (Y-only)
             Vector3 look = t.transform.position - actor.transform.position;
             look.y = 0f;
             if (look.sqrMagnitude > 0.0001f)
@@ -122,7 +121,6 @@ namespace Actions
             Quaternion startRot = actor.transform.rotation;
 
             var animDrv = actor.GetComponent<AnimDriver>();
-            // --- NEW: If Ranged, lock position by disabling root motion during the cast ---
             bool lockPosition = (skill.moveStyle == SkillDefinition.MoveStyle.Ranged);
             bool oldRootMotion = false;
             if (lockPosition && animDrv && animDrv.animator)
@@ -183,7 +181,6 @@ namespace Actions
             if (lockPosition) actor.transform.position = startPos;
 
 
-            // ===== EFFECT RESOLUTION =====
             if (skill.effectType == SkillDefinition.EffectType.Damage)
             {
                 foreach (var t in targets)

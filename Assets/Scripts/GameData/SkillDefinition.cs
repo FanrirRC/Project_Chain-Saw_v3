@@ -8,11 +8,9 @@ namespace Data
     [CreateAssetMenu(menuName = "RPG/Skill")]
     public partial class SkillDefinition : ScriptableObject
     {
-        // ====== 1) EFFECT / POTENCY ======
         public enum EffectType { Damage, Heal, None }
         public enum PotencyMode { FlatNumber, Percent }
 
-        // ====== 2) STATUS OPS ======
         public enum StatusOp { Inflict, Remove }
 
         [Serializable]
@@ -26,7 +24,6 @@ namespace Data
             public StatusOp op = StatusOp.Inflict;
         }
 
-        // ====== 3) TARGETING ======
         public enum TargetSelection { SelfOnly, Single, Multi }
 
         [Flags]
@@ -37,12 +34,11 @@ namespace Data
             Enemies = 1 << 1
         }
 
-        // ====== 4) ANIMATION ======
         public enum MoveStyle { Melee, Ranged }
 
         public enum AnimTrigger
         {
-            Default,            // use character defaults / legacy calls
+            Default,
             Attack,
             Hurt,
             Die,
@@ -53,10 +49,6 @@ namespace Data
             Items,
             Block
         }
-
-        // =======================
-        //   INSPECTOR LAYOUT
-        // =======================
 
         [BoxGroup("Skill_Details", centerLabel: true)]
         [HorizontalGroup("Skill_Details/Split", Width = 80), HideLabel, PreviewField(80)]
@@ -75,7 +67,6 @@ namespace Data
         [VerticalGroup("Skill_Details/Split/Properties")]
         [TextArea] public string description;
 
-        // ---- Targeting (new schema) ----
         [BoxGroup("Targeting", centerLabel: true)]
         [EnumToggleButtons, LabelText("Selection")]
         public TargetSelection targetSelection = TargetSelection.Single;
@@ -84,7 +75,6 @@ namespace Data
         [EnumToggleButtons, LabelText("Faction")]
         public TargetFaction targetFaction = TargetFaction.Enemies;
 
-        // ---- Effect / Potency (updated schema) ----
         [BoxGroup("Skill_Effect", centerLabel: true)]
         [EnumToggleButtons, LabelText("Effect Type")]
         public EffectType effectType = EffectType.Damage;
@@ -104,13 +94,11 @@ namespace Data
         [EnumToggleButtons, LabelText("Potency Mode")]
         public PotencyMode potencyMode = PotencyMode.FlatNumber;
 
-        // ---- Status list (apply/remove multiple) ----
         [HorizontalGroup("Skill_Effect/Split/Right")]
         [Header("Status Effects")]
         [TableList(AlwaysExpanded = true, NumberOfItemsPerPage = 5)]
         public List<StatusEntry> statuses = new List<StatusEntry>();
 
-        // ---- Animation override (shared trigger names) ----
         [BoxGroup("Animation", centerLabel: true)]
         [HorizontalGroup("Animation/Split", Width = 0.5f)]
         [VerticalGroup("Animation/Split/Left")]
@@ -120,10 +108,6 @@ namespace Data
         [VerticalGroup("Animation/Split/Right")]
         [LabelText("Trigger")]
         public AnimTrigger animTrigger = AnimTrigger.Default;
-
-        // =======================
-        //   HELPER QUERIES
-        // =======================
 
         public bool UsesPercent => potencyMode == PotencyMode.Percent;
         public bool IsDamage => effectType == EffectType.Damage;

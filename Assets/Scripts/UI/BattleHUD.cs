@@ -15,14 +15,14 @@ namespace UI
             [Header("Basics")]
             public TMP_Text nameText;
             public TMP_Text hpText;
-            public TMP_Text spText;         // keep if you still want "SP: cur/max" numbers
+            public TMP_Text spText;
 
             [Header("HP Fillers (pick one)")]
             public Image hpFillImage;
             public Slider hpSlider;
 
             [Header("SP Counter (new)")]
-            public SPStripUI spStrip;       // ← assign the "Skill Points v2" object (has SPStripUI)
+            public SPStripUI spStrip;
 
             [Header("Highlight")]
             public GameObject turnHighlight;
@@ -54,7 +54,6 @@ namespace UI
                 if (!_cachedLayout && p.infoTransform)
                     p.baseInfoAnchoredPos = p.infoTransform.anchoredPosition;
 
-                // Bind SP strip to the unit (it will listen for SP changes)
                 if (p.spStrip != null) p.spStrip.Bind(p.unit);
 
                 UpdatePanel(p);
@@ -101,18 +100,15 @@ namespace UI
 
                 SetHPFill(p, 0, 0);
 
-                // SP counter is data-driven via SPStripUI; no bar/slider to zero out.
                 ClearStatusIcons(p);
                 return;
             }
 
             if (p.nameText) p.nameText.text = p.unit.characterName;
             if (p.hpText) p.hpText.text = $"HP:{p.unit.currentHP}/{p.unit.maxHP}";
-            if (p.spText) p.spText.text = $"SP:{p.unit.currentSP}/{p.unit.maxSP}"; // optional numeric text
+            if (p.spText) p.spText.text = $"SP:{p.unit.currentSP}/{p.unit.maxSP}";
 
             SetHPFill(p, p.unit.currentHP, p.unit.maxHP);
-
-            // SPStripUI reacts to OnSPChanged automatically after Bind(), so no fill logic here.
 
             DrawStatusIcons(p);
         }

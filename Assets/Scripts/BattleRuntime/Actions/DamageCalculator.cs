@@ -26,7 +26,6 @@ namespace Actions
             if (skill == null || attacker == null || defender == null) return 0;
             int baseStat = GetPotencyBaseStat(skill.potencyStat, attacker, defender, isHeal: false);
             int amount = ApplyPotency(skill.power, skill.potencyMode == Data.SkillDefinition.PotencyMode.Percent, baseStat);
-            // keep defense interaction (simple and consistent)
             int defStat = GetEffectiveDEF(defender);
             return Mathf.Max(0, amount - defStat);
         }
@@ -52,8 +51,6 @@ namespace Actions
         }
         private static int GetPotencyBaseStat(StatType stat, CharacterScript source, CharacterScript target, bool isHeal)
         {
-            // For MaxHP/MaxSP it makes more sense to base on the TARGET (esp. healing items).
-            // For ATK/DEF it makes more sense to base on the SOURCE.
             switch (stat)
             {
                 case StatType.MaxHP: return target != null ? target.maxHP : 0;
@@ -63,8 +60,6 @@ namespace Actions
                 default: return 0;
             }
         }
-
-        // --- Effective stats ---
 
         public static int GetEffectiveATK(CharacterScript c)
         {

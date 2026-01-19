@@ -61,13 +61,10 @@ namespace UI
 
             ClearAllCursors();
 
-            // --- NEW: ALL mode — show a cursor on EVERY live target and wait for Enter/Esc ---
             if (mode == TargetMode.All)
             {
-                // build ResultTargets immediately
                 ResultTargets.AddRange(live);
 
-                // spawn a cursor for each target
                 foreach (var t in live)
                 {
                     GameObject c;
@@ -77,7 +74,6 @@ namespace UI
                     {
                         c = Instantiate(cursorPrefab, screenCanvas.transform);
                         rt = c.GetComponent<RectTransform>();
-                        // position in screen-space
                         Vector2 screen = Camera.main ? (Vector2)Camera.main.WorldToScreenPoint(t.transform.position + (Vector3)worldOffset) : Vector2.zero;
                         RectTransformUtility.ScreenPointToLocalPointInRectangle(
                             (RectTransform)screenCanvas.transform, screen,
@@ -96,12 +92,10 @@ namespace UI
                     if (rt) _cursorRTsAll.Add(rt);
                 }
 
-                // Wait for Enter to confirm or Esc to cancel
                 while (true)
                 {
                     if (Input.GetKeyDown(KeyCode.Escape)) { WasCancelled = true; break; }
                     if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)) { break; }
-                    // keep the cursors following targets if they move:
                     if (_cursorRTsAll.Count > 0 && screenCanvas && screenCanvas.renderMode != RenderMode.WorldSpace)
                     {
                         for (int i = 0; i < live.Count && i < _cursorRTsAll.Count; i++)
@@ -126,7 +120,7 @@ namespace UI
             }
 
             int index = 0;
-            Highlight(live, index); // your existing single-cursor highlight
+            Highlight(live, index);
             while (true)
             {
                 if (Input.GetKeyDown(KeyCode.LeftArrow)) { index = (index - 1 + live.Count) % live.Count; Highlight(live, index); }
